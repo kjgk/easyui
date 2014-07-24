@@ -1,0 +1,153 @@
+﻿
+body {
+    font-family: "微软雅黑", "Hiragino Sans GB", tahoma, arial, "\5B8B\4F53" !important;
+    font-size: 12px;
+    line-height: 1.8em;
+    color: #daebff;
+    background-color: #1f2637;
+    margin: 0;
+    padding: 0;
+    background: url(../images/login_bg.png);
+}
+
+a {
+    color: #666666;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+    a:hover {
+        color: #00a2ca;
+        text-decoration: none;
+    }
+
+ul, li, h1, h2, a, * {
+    margin: 0;
+    padding: 0;
+}
+
+.clear {
+    clear: both;
+}
+
+.loginwr {
+    width: 100%;
+    background: #1f2b46;
+}
+
+.login {
+    width: 1280px;
+    height: 530px;
+    margin: 0 auto;
+    background: url(../images/login_top.png) no-repeat;
+}
+
+.login_bottom {
+    width: 100%;
+    height: 190px;
+    background: url(../images/login_bottom.png) repeat-x;
+    position: fixed;
+    top: 530px;
+}
+
+.login_content {
+    float: right;
+    margin-top: 162px;
+    width: 423px;
+}
+
+    .login_content h3 {
+        font-size: 16px;
+        margin-bottom: 13px;
+    }
+
+    .login_content ul {
+        list-style: none;
+    }
+
+.login_items {
+    clear: both;
+    width: 423px;
+    float: left;
+    height: 40px;
+    line-height: 40px;
+    margin-bottom: 10px;
+}
+
+.login_input {
+    width: 180px;
+    height: 40px;
+    border: 0;
+    float: left;
+    text-indent: 14px;
+    font-size: 16px;
+    color: #595959;
+    font-family: arial;
+}
+
+.login_ico {
+    float: left;
+}
+
+.login_content a {
+    color: #516ac1;
+    margin-left: 20px;
+}
+
+.login_forget {
+    margin-left: 140px;
+    margin-bottom: 15px;
+}
+
+
+.login_content a:hover {
+    color: #d6820e;
+}
+
+.login_btn {
+    width: 220px;
+    height: 40px;
+    background: #3e62e4;
+    border: 0;
+    cursor: pointer;
+    color: #fff;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+    .login_btn:hover {
+        background: #d6820e;
+    }
+
+.x {
+    width: 17px;
+    height: 17px;
+    background: url(../images/ico4.png) no-repeat;
+    float: left;
+    margin-left: -25px;
+    margin-top: 12px;
+    cursor: pointer;
+}
+
+.login_yzm {
+    width: 90px;
+    height: 40px;
+    border: 0;
+    float: left;
+    text-indent: 14px;
+    font-size: 16px;
+    color: #595959;
+    font-family: arial;
+}
+
+.login_yzm2 {
+    margin-left: 5px;
+}
+
+.copyright {
+    width:600px;
+    margin:0 auto;
+    margin-right:200px;
+    color:#6077a8;
+    margin-top:28px;
+}
