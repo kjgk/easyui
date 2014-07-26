@@ -16,37 +16,37 @@ label {
     margin: 0px auto;
 }
 
-    .top .ico {
-        background: url(images/ico1.png) no-repeat;
-        width: 16px;
-        height: 15px;
-        float: left;
-        margin-right: 10px;
-    }
+.top .ico {
+    background: url(images/ico1.png) no-repeat;
+    width: 16px;
+    height: 15px;
+    float: left;
+    margin-right: 10px;
+}
 
-    .top ul {
-        list-style-type: none;
-        margin: 0px;
-        padding: 0px;
-        float: right;
-        color: #ffffff;
-        font-size: 14px;
-        margin-right: 31px;
-    }
+.top ul {
+    list-style-type: none;
+    margin: 0px;
+    padding: 0px;
+    float: right;
+    color: #ffffff;
+    font-size: 14px;
+    margin-right: 31px;
+}
 
-        .top ul li {
-            float: left;
-            padding: 0 10px;
-        }
+.top ul li {
+    float: left;
+    padding: 0 10px;
+}
 
-            .top ul li a {
-                text-decoration: none;
-                color: #9cc4f4;
-            }
+.top ul li a {
+    text-decoration: none;
+    color: #9cc4f4;
+}
 
-                .top ul li a:hover {
-                    color: #ffffff;
-                }
+.top ul li a:hover {
+    color: #ffffff;
+}
 
 .logo {
     float: left;
@@ -94,58 +94,54 @@ label {
     padding: 0px;
 }
 
-    .easyui-accordion ul li {
-        padding: 0px;
-        clear: both;
-        border-bottom: 1px solid #1b253e;
-    }
+.easyui-accordion ul li {
+    padding: 0px;
+    clear: both;
+    border-bottom: 1px solid #1b253e;
+}
 
-        .easyui-accordion ul li a {
-            background: #1f2d4d;
-            height: 45px;
-            line-height: 45px;
-            line-height: 45px;
-            text-decoration: none;
-            color: #adb5c3;
-            font-size: 14px;
-            display: block;
-        }
+.easyui-accordion ul li a {
+    background: #1f2d4d;
+    height: 45px;
+    line-height: 45px;
+    line-height: 45px;
+    text-decoration: none;
+    color: #adb5c3;
+    font-size: 14px;
+    display: block;
+}
 
-            .easyui-accordion ul li a:hover {
-                background: #294b81;
-                height: 45px;
-                line-height: 45px;
-                display: block;
-                color: #fff;
-            }
+.easyui-accordion ul li a:hover {
+    background: #294b81;
+    height: 45px;
+    line-height: 45px;
+    display: block;
+    color: #fff;
+}
 
-        .easyui-accordion ul li div {
-        }
+.easyui-accordion ul li div {
+}
 
-            .easyui-accordion ul li div.hover {
-                border: 1px dashed #99BBE8;
-                background: #E0ECFF;
-                cursor: pointer;
-            }
+.easyui-accordion ul li div.hover {
+    border: 1px dashed #99BBE8;
+    background: #E0ECFF;
+    cursor: pointer;
+}
 
-                .easyui-accordion ul li div.hover a {
-                    color: #416AA3;
-                }
+.easyui-accordion ul li div.hover a {
+    color: #416AA3;
+}
 
-            .easyui-accordion ul li div.selected {
-                border: 1px solid #99BBE8;
-                background: #E0ECFF;
-                cursor: default;
-            }
+.easyui-accordion ul li div.selected {
+    border: 1px solid #99BBE8;
+    background: #E0ECFF;
+    cursor: default;
+}
 
-                .easyui-accordion ul li div.selected a {
-                    color: #416AA3;
-                    font-weight: bold;
-                }
-
-
-
-
+.easyui-accordion ul li div.selected a {
+    color: #416AA3;
+    font-weight: bold;
+}
 
 .ico5 {
     background: url(images/ico5.png) no-repeat;
@@ -166,14 +162,13 @@ label {
 .tt {
     margin: 0;
     padding: 0;
-    margin-left: 30px;
     font-weight: bold;
     color: #444444;
     font-size: 14px;
     float: left;
     height: 79px;
-        width:1086px;
-    overflow:hidden;
+    /*width: 1086px;*/
+    overflow: hidden;
 
 }
 
@@ -245,7 +240,7 @@ label {
     font-size: 18px;
     left: 10px;
     position: absolute;
-    top: 67px;
+    top: 12px;
     z-index: 100;
 }
 
@@ -285,10 +280,11 @@ label {
     border: 1px solid #86a2b7;
     height: 28px;
     line-height: 28px;
-    width: 69px;
+    width: 96px;
     float: left;
 }
- .input-title3 {
+
+.input-title3 {
     background: #007c41;
     height: 28px;
     width: 176px;
@@ -308,13 +304,12 @@ label {
     float: left;
 }
 
-
-.sp{
-    float:left;
-    width:10px;
-    height:2px;
-    background:#8ba3ca;
-    margin:14px 2px;
+.sp {
+    float: left;
+    width: 10px;
+    height: 2px;
+    background: #8ba3ca;
+    margin: 14px 2px;
 }
 
 .it {
@@ -329,9 +324,8 @@ label {
 }
 
 .st {
-    margin-top: 6px;
-    margin-bottom: 30px;
-    width: 987px;
+    margin: 5px 0px;
+    width: 980px;
     float: left;
 }
 
@@ -362,6 +356,7 @@ a.s-btn:hover {
     text-indent: 3px;
     font-size: 15px;
 }
+
 .t-th2 {
     height: 18px;
     background: #0350ac;
@@ -395,6 +390,7 @@ a.x:hover {
 a.e:hover {
     color: #d6820e;
 }
+
 /*行情结果*/
 .hq-top {
     width: 1093px;
@@ -422,26 +418,32 @@ a.e:hover {
     margin: 0 auto;
 }
 
-    .hq-table .datagrid-pager {
-        background: none repeat scroll 0 0 #f7faff;
-        border-bottom: 1px solid #a8c7f1;
-        border-top: 1px solid #a8c7f1;
-        bottom: 33px;
-        position: relative;
-        z-index: 10;
-        height: 45px;
-        line-height: 45px;
-    }
-    .bottom{
-        position:fixed;
-        bottom:0;
-        height:20px;
-        width:100%;
-        background:#0044a1;
-        text-align:right;
-        right:0;
-        color:#3777cf;
-        padding-right:13px;
-        line-height:20px;
-        z-index:1;
-    }
+.hq-table .datagrid-pager {
+    background: none repeat scroll 0 0 #f7faff;
+    border-bottom: 1px solid #a8c7f1;
+    border-top: 1px solid #a8c7f1;
+    bottom: 33px;
+    position: relative;
+    z-index: 10;
+    height: 45px;
+    line-height: 45px;
+}
+
+.bottom {
+    position: fixed;
+    bottom: 0;
+    height: 20px;
+    width: 100%;
+    background: #0044a1;
+    text-align: right;
+    right: 0;
+    color: #3777cf;
+    padding-right: 13px;
+    line-height: 20px;
+    z-index: 1;
+}
+
+.t-th {
+    border-left: 1px solid #a8cff1;
+    border-right: 1px solid #a8cff1;
+}
