@@ -1,0 +1,538 @@
+<div style="padding:10px"> 
+ <h3>Tree</h3> 
+ <p>Override defaults with $.fn.tree.defaults.</p> 
+ <p> The tree displays hierarchical data in a tree structure in a web page. It provides users expand, collapse, drag and drop, editing and async loading functionality. </p> 
+ <img src="api/images/model/tree.png" /> 
+ <h4>Dependencies</h4> 
+ <ul> 
+  <li>draggable</li> 
+  <li>droppable</li> 
+ </ul> 
+ <h4>Usage Example</h4> 
+ <p> Tree can be definded in &lt;ul&gt; element. The markup can defines leaf and children. The nodes will be &lt;li&gt; elements within ul list. The following shows the elements that will be used to make the tree node nested within the ul elements. </p> 
+ <textarea name="code-tree" class="html">
+	&lt;ul id=&quot;tt&quot; class=&quot;easyui-tree&quot;&gt;
+		&lt;li&gt;
+			&lt;span&gt;Folder&lt;/span&gt;
+			&lt;ul&gt;
+				&lt;li&gt;
+					&lt;span&gt;Sub Folder 1&lt;/span&gt;
+					&lt;ul&gt;
+						&lt;li&gt;
+							&lt;span&gt;&lt;a href=&quot;#&quot;&gt;File 11&lt;/a&gt;&lt;/span&gt;
+						&lt;/li&gt;
+						&lt;li&gt;
+							&lt;span&gt;File 12&lt;/span&gt;
+						&lt;/li&gt;
+						&lt;li&gt;
+							&lt;span&gt;File 13&lt;/span&gt;
+						&lt;/li&gt;
+					&lt;/ul&gt;
+				&lt;/li&gt;
+				&lt;li&gt;
+					&lt;span&gt;File 2&lt;/span&gt;
+				&lt;/li&gt;
+				&lt;li&gt;
+					&lt;span&gt;File 3&lt;/span&gt;
+				&lt;/li&gt;
+			&lt;/ul&gt;
+		&lt;/li&gt;
+		&lt;li&gt;
+			&lt;span&gt;File21&lt;/span&gt;
+		&lt;/li&gt;
+	&lt;/ul&gt;
+</textarea> 
+ <p>Tree can also be defined in an empty &lt;ul&gt; element and load data using javascript.</p> 
+ <textarea name="code-tree" class="html">
+	&lt;ul id=&quot;tt&quot;&gt;&lt;/ul&gt;
+</textarea> 
+ <textarea name="code-tree" class="js">
+	$('#tt').tree({
+		url:'tree_data.json'
+	});
+</textarea> 
+ <p>Use loadFilter to process the json data from ASP.NET web services.</p> 
+ <textarea name="code-tree" class="js">
+	$('#tt').tree({
+		url: ...,
+		loadFilter: function(data){
+			if (data.d){
+				return data.d;
+			} else {
+				return data;
+			}
+		}
+	});
+</textarea> 
+ <br /> 
+ <h4>Tree Data Format</h4> 
+ <p>Every node can contains following properties:</p> 
+ <ul> 
+  <li>id: node id, which is important to load remote data</li> 
+  <li>text: node text to show</li> 
+  <li>state: node state, 'open' or 'closed', default is 'open'. When set to 'closed', the node have children nodes and will load them from remote site</li> 
+  <li>checked: Indicate whether the node is checked selected.</li> 
+  <li>attributes: custom attributes can be added to a node</li> 
+  <li>children: an array nodes defines some children nodes</li> 
+ </ul> 
+ <p>Some example:</p> 
+ <textarea name="code-tree" class="js">
+	[{
+		&quot;id&quot;:1,
+		&quot;text&quot;:&quot;Folder1&quot;,
+		&quot;iconCls&quot;:&quot;icon-save&quot;,
+		&quot;children&quot;:[{
+			&quot;text&quot;:&quot;File1&quot;,
+			&quot;checked&quot;:true
+		},{
+			&quot;text&quot;:&quot;Books&quot;,
+			&quot;state&quot;:&quot;open&quot;,
+			&quot;attributes&quot;:{
+				&quot;url&quot;:&quot;/demo/book/abc&quot;,
+				&quot;price&quot;:100
+			},
+			&quot;children&quot;:[{
+				&quot;text&quot;:&quot;PhotoShop&quot;,
+				&quot;checked&quot;:true
+			},{
+				&quot;id&quot;: 8,
+				&quot;text&quot;:&quot;Sub Bookds&quot;,
+				&quot;state&quot;:&quot;closed&quot;
+			}]
+		}]
+	},{
+		&quot;text&quot;:&quot;Languages&quot;,
+		&quot;state&quot;:&quot;closed&quot;,
+		&quot;children&quot;:[{
+			&quot;text&quot;:&quot;Java&quot;
+		},{
+			&quot;text&quot;:&quot;C#&quot;
+		}]
+	}]
+</textarea> 
+ <br /> 
+ <h4>The Async Tree</h4> 
+ <p> The tree supports the built-in async loading mode, with which users create an empty tree, then specify a server side that dynamically returns the JSON data to use to populate the tree with asynchronously and on demand. Here is an example: </p> 
+ <textarea name="code-tree" class="html">
+	&lt;ul class=&quot;easyui-tree&quot; data-options=&quot;url:'get_data.php'&quot;&gt;&lt;/ul&gt;
+</textarea> 
+ <p> The tree is loaded with the URL 'get_data.php'. The child nodes to be loaded dependent on the parent node state. When expand a closed node, if the node has no child nodes loaded, it will send node id value as the http request parameter named 'id' to server via the URL defined above to retrieve child nodes. </p> 
+ <p>Looks at the data returned from server:</p> 
+ <textarea name="code-tree" class="js">
+	[{
+		&quot;id&quot;: 1,
+		&quot;text&quot;: &quot;Node 1&quot;,
+		&quot;state&quot;: &quot;closed&quot;,
+		&quot;children&quot;: [{
+			&quot;id&quot;: 11,
+			&quot;text&quot;: &quot;Node 11&quot;
+		},{
+			&quot;id&quot;: 12,
+			&quot;text&quot;: &quot;Node 12&quot;
+		}]
+	},{
+		&quot;id&quot;: 2,
+		&quot;text&quot;: &quot;Node 2&quot;,
+		&quot;state&quot;: &quot;closed&quot;
+	}]
+</textarea> 
+ <p> The node 1 and node 2 are closed, when expand the node 1, it will directly show its child nodes. When expand node 2, it will send the value(2) to server to retrieve child nodes. </p> 
+ <p> This tutorial <a href="../tutorial/tree/tree2.php" target="_blank">Create Async Tree</a> shows how to write server code to return the tree data on demand. </p> 
+ <h4>Properties</h4> 
+ <table class="doc-table"> 
+  <tbody>
+   <tr> 
+    <th><strong>Name</strong></th> 
+    <th><strong>Type</strong></th> 
+    <th><strong>Description</strong></th> 
+    <th><strong>Default</strong></th> 
+   </tr> 
+   <tr> 
+    <td>url</td> 
+    <td>string</td> 
+    <td>URL检索远程数据。</td> 
+    <td>null</td> 
+   </tr> 
+   <tr> 
+    <td>method</td> 
+    <td>string</td> 
+    <td>检索数据的HTTP方法。</td> 
+    <td>post</td> 
+   </tr> 
+   <tr> 
+    <td>animate</td> 
+    <td>boolean</td> 
+    <td>如果定义显示动画效果时，节点展开或折叠。</td> 
+    <td>false</td> 
+   </tr> 
+   <tr> 
+    <td>checkbox</td> 
+    <td>boolean</td> 
+    <td>如果定义在每个节点显示复选框。</td> 
+    <td>false</td> 
+   </tr> 
+   <tr> 
+    <td>cascadeCheck</td> 
+    <td>boolean</td> 
+    <td>如果定义级联检查。</td> 
+    <td>true</td> 
+   </tr> 
+   <tr> 
+    <td>onlyLeafCheck</td> 
+    <td>boolean</td> 
+    <td>定义如果只在叶节点显示复选框。</td> 
+    <td>false</td> 
+   </tr> 
+   <tr> 
+    <td>lines</td> 
+    <td>boolean</td> 
+    <td>如果定义显示树线。</td> 
+    <td>false</td> 
+   </tr> 
+   <tr> 
+    <td>dnd</td> 
+    <td>boolean</td> 
+    <td>定义如果启用拖放。</td> 
+    <td>false</td> 
+   </tr> 
+   <tr> 
+    <td>data</td> 
+    <td>array</td> 
+    <td>节点加载数据。</td> 
+    <td>null</td> 
+   </tr> 
+   <tr> 
+    <td>formatter</td> 
+    <td>function(node)</td> 
+    <td>定义了如何渲染节点的文本。代码示例：</td> 
+   </tr> 
+   <tr> 
+    <td>loader</td> 
+    <td>function(param,success,error)</td> 
+    <td>定义了如何从远程服务器的负荷数据。返回false可以中止这一行动。此功能需要下列参数：参数：参数的对象传递到远程服务器。成功（数据）：将被调用时，检索数据成功回调函数。error()：将被调用时，未能检索数据的回调函数。</td> 
+    <td>json loader</td> 
+   </tr> 
+   <tr> 
+    <td>loadFilter</td> 
+    <td>function(data,parent)</td> 
+    <td>过滤后的数据返回到显示。返回的数据是在标准的树格式。此功能需要下列参数：数据：原始数据被加载。家长：DOM对象，显示父节点。</td> 
+    <td></td> 
+   </tr> 
+  </tbody>
+ </table> 
+ <h4>Events</h4> 
+ <p>Many events callback function can take the 'node' parameter, which contains following properties:</p> 
+ <ul> 
+  <li>id: An identity value bind to the node.</li> 
+  <li>text: Text to be showed.</li> 
+  <li>iconCls: The css class to display icon.</li> 
+  <li>checked: Whether the node is checked.</li> 
+  <li>state: The node state, 'open' or 'closed'.</li> 
+  <li>attributes: Custom attributes bind to the node.</li> 
+  <li>target: Target DOM object.</li> 
+ </ul> 
+ <table class="doc-table"> 
+  <tbody>
+   <tr> 
+    <th><strong>Name</strong></th> 
+    <th><strong>Parameters</strong></th> 
+    <th><strong>Description</strong></th> 
+   </tr> 
+   <tr> 
+    <td>onClick</td> 
+    <td>node</td> 
+    <td>当用户点击一个节点火灾。代码示例：</td> 
+   </tr> 
+   <tr> 
+    <td>onDblClick</td> 
+    <td>node</td> 
+    <td>当用户双击一个节点火灾。</td> 
+   </tr> 
+   <tr> 
+    <td>onBeforeLoad</td> 
+    <td>node, param</td> 
+    <td>在请求加载数据的火灾，返回false取消此荷载作用。</td> 
+   </tr> 
+   <tr> 
+    <td>onLoadSuccess</td> 
+    <td>node, data</td> 
+    <td>当数据成功加载火灾。</td> 
+   </tr> 
+   <tr> 
+    <td>onLoadError</td> 
+    <td>arguments</td> 
+    <td>当数据加载失败，火灾，该参数是作为jquery.ajax“错误”功能相同。</td> 
+   </tr> 
+   <tr> 
+    <td>onBeforeExpand</td> 
+    <td>node</td> 
+    <td>在节点是展开的火灾，返回false取消扩大行动。</td> 
+   </tr> 
+   <tr> 
+    <td>onExpand</td> 
+    <td>node</td> 
+    <td>火灾时，节点是展开。</td> 
+   </tr> 
+   <tr> 
+    <td>onBeforeCollapse</td> 
+    <td>node</td> 
+    <td>在节点倒塌，火灾，返回false取消崩塌作用。</td> 
+   </tr> 
+   <tr> 
+    <td>onCollapse</td> 
+    <td>node</td> 
+    <td>火灾时，节点倒塌。</td> 
+   </tr> 
+   <tr> 
+    <td>onBeforeCheck</td> 
+    <td>node, checked</td> 
+    <td>在用户单击复选框的火灾，返回false取消这项检查行动。这一事件是自1.3.1版。</td> 
+   </tr> 
+   <tr> 
+    <td>onCheck</td> 
+    <td>node, checked</td> 
+    <td>火灾，当用户单击复选框。</td> 
+   </tr> 
+   <tr> 
+    <td>onBeforeSelect</td> 
+    <td>node</td> 
+    <td>在节点选择火灾，返回false取消选择操作。</td> 
+   </tr> 
+   <tr> 
+    <td>onSelect</td> 
+    <td>node</td> 
+    <td>火灾时，节点选择。</td> 
+   </tr> 
+   <tr> 
+    <td>onContextMenu</td> 
+    <td>e, node</td> 
+    <td>火灾时，节点，右键点击。代码示例：</td> 
+   </tr> 
+   <tr> 
+    <td>onBeforeDrag</td> 
+    <td>node</td> 
+    <td>火灾时，节点的拖动开始，返回false否认阻力。这一事件是因为版1.3.2。</td> 
+   </tr> 
+   <tr> 
+    <td>onStartDrag</td> 
+    <td>node</td> 
+    <td>火灾时开始拖动节点。这一事件是因为版1.3.2。</td> 
+   </tr> 
+   <tr> 
+    <td>onStopDrag</td> 
+    <td>node</td> 
+    <td>火灾后停止拖动节点。这一事件是因为版1.3.2。</td> 
+   </tr> 
+   <tr> 
+    <td>onDragEnter</td> 
+    <td>target, source</td> 
+    <td>火灾时，节点拖进一些目标节点可以下降到。返回false否认掉。目标：目标节点元素被删除。来源：源节点被拖。这一事件是因为版1.3.2。</td> 
+   </tr> 
+   <tr> 
+    <td>onDragOver</td> 
+    <td>target, source</td> 
+    <td>火灾当一个节点被拖到目标节点可以下降到，返回false否定掉。目标：目标节点元素被删除。来源：源节点被拖。这一事件是因为版1.3.2。</td> 
+   </tr> 
+   <tr> 
+    <td>onDragLeave</td> 
+    <td>target, source</td> 
+    <td>当一个节点被大火留下一些目标节点可以下降到。目标：目标节点元素被删除。来源：源节点被拖。这一事件是因为版1.3.2。</td> 
+   </tr> 
+   <tr> 
+    <td>onBeforeDrop</td> 
+    <td>target,source,point</td> 
+    <td>在一个节点是下降的火灾，返回false否定掉。目标：DOM节点对象，有针对性的下降。来源：源节点。点：显示删除操作，可能的值是：'添加'，' '或'底'。这一事件是自1.3.3版。</td> 
+   </tr> 
+   <tr> 
+    <td>onDrop</td> 
+    <td>target,source,point</td> 
+    <td>当一个节点被丢弃的火灾。目标：DOM节点对象，有针对性的下降。来源：源节点。点：显示删除操作，可能的值是：'添加'，' '或'底'。</td> 
+   </tr> 
+   <tr> 
+    <td>onBeforeEdit</td> 
+    <td>node</td> 
+    <td>触发前编辑节点。</td> 
+   </tr> 
+   <tr> 
+    <td>onAfterEdit</td> 
+    <td>node</td> 
+    <td>火灾后编辑节点。</td> 
+   </tr> 
+   <tr> 
+    <td>onCancelEdit</td> 
+    <td>node</td> 
+    <td>火灾时，取消编辑操作。</td> 
+   </tr> 
+  </tbody>
+ </table> 
+ <h4>Methods</h4> 
+ <table class="doc-table"> 
+  <tbody>
+   <tr> 
+    <th><strong>Name</strong></th> 
+    <th><strong>Parameter</strong></th> 
+    <th><strong>Description</strong></th> 
+   </tr> 
+   <tr> 
+    <td>options</td> 
+    <td>none</td> 
+    <td>回归树的选项。</td> 
+   </tr> 
+   <tr> 
+    <td>loadData</td> 
+    <td>data</td> 
+    <td>加载树数据。</td> 
+   </tr> 
+   <tr> 
+    <td>getNode</td> 
+    <td>target</td> 
+    <td>获取指定的节点对象。</td> 
+   </tr> 
+   <tr> 
+    <td>getData</td> 
+    <td>target</td> 
+    <td>获取指定的节点的数据，包括它的孩子。</td> 
+   </tr> 
+   <tr> 
+    <td>reload</td> 
+    <td>target</td> 
+    <td>加载树数据。</td> 
+   </tr> 
+   <tr> 
+    <td>getRoot</td> 
+    <td>none</td> 
+    <td>得到根节点，返回节点对象</td> 
+   </tr> 
+   <tr> 
+    <td>getRoots</td> 
+    <td>none</td> 
+    <td>获得根节点，返回节点阵列。</td> 
+   </tr> 
+   <tr> 
+    <td>getParent</td> 
+    <td>target</td> 
+    <td>获取父节点，目标节点参数表明DOM对象。</td> 
+   </tr> 
+   <tr> 
+    <td>getChildren</td> 
+    <td>target</td> 
+    <td>让孩子节点，目标节点参数表明DOM对象。</td> 
+   </tr> 
+   <tr> 
+    <td>getChecked</td> 
+    <td>state</td> 
+    <td>被选中的节点。国家可利用价值：'检查'，'unchecked’，'indeterminate”。如果国家不分，返回“检查”节点。代码示例：</td> 
+   </tr> 
+   <tr> 
+    <td>getSelected</td> 
+    <td>none</td> 
+    <td>获得所选节点并返回它，如果没有选择节点返回null。</td> 
+   </tr> 
+   <tr> 
+    <td>isLeaf</td> 
+    <td>target</td> 
+    <td>确定指定的节点是叶节点，目标参数表明DOM对象。</td> 
+   </tr> 
+   <tr> 
+    <td>find</td> 
+    <td>id</td> 
+    <td>找到指定的节点和节点对象返回的。代码示例：</td> 
+   </tr> 
+   <tr> 
+    <td>select</td> 
+    <td>target</td> 
+    <td>选择一个节点，目标节点参数表明DOM对象。</td> 
+   </tr> 
+   <tr> 
+    <td>check</td> 
+    <td>target</td> 
+    <td>设置指定的节点检查。</td> 
+   </tr> 
+   <tr> 
+    <td>uncheck</td> 
+    <td>target</td> 
+    <td>设置指定的节点无节制的。</td> 
+   </tr> 
+   <tr> 
+    <td>collapse</td> 
+    <td>target</td> 
+    <td>折叠节点，目标节点参数表明DOM对象。</td> 
+   </tr> 
+   <tr> 
+    <td>expand</td> 
+    <td>target</td> 
+    <td>展开一个节点，目标节点参数表明DOM对象。当节点关闭并没有子节点，该节点ID值（命名为id参数）将被发送到服务器请求的子节点的数据。</td> 
+   </tr> 
+   <tr> 
+    <td>collapseAll</td> 
+    <td>target</td> 
+    <td>折叠所有节点。</td> 
+   </tr> 
+   <tr> 
+    <td>expandAll</td> 
+    <td>target</td> 
+    <td>展开所有节点。</td> 
+   </tr> 
+   <tr> 
+    <td>expandTo</td> 
+    <td>target</td> 
+    <td>扩大从根到指定的节点。</td> 
+   </tr> 
+   <tr> 
+    <td>append</td> 
+    <td>param</td> 
+    <td>一个父节点的子节点添加一些。param参数有两个属性：家长：DOM对象，父节点追加到，如果不指定，追加为根节点。数据：阵列，节点数据。代码示例：</td> 
+   </tr> 
+   <tr> 
+    <td>toggle</td> 
+    <td>target</td> 
+    <td>以扩大\/崩溃的节点状态参数表明，目标节点的DOM对象。</td> 
+   </tr> 
+   <tr> 
+    <td>insert</td> 
+    <td>param</td> 
+    <td>插入一个节点之前或之后的指定节点。“参数”参数包含以下属性：之前：DOM对象，之前插入节点。后：DOM对象，插入后的节点。数据对象，节点数据。下面的代码演示如何在选定的节点插入新节点：</td> 
+   </tr> 
+   <tr> 
+    <td>remove</td> 
+    <td>target</td> 
+    <td>删除一个节点和它的子节点，目标节点参数表明DOM对象。</td> 
+   </tr> 
+   <tr> 
+    <td>pop</td> 
+    <td>target</td> 
+    <td>弹出一个节点和它的子节点，该方法是将返回被删除的节点的数据相同，但。</td> 
+   </tr> 
+   <tr> 
+    <td>update</td> 
+    <td>param</td> 
+    <td>更新指定的节点。“参数”参数具有以下特性：目标（DOM对象，要更新的节点），ID，文本，iconcls，检查代码示例，等：</td> 
+   </tr> 
+   <tr> 
+    <td>enableDnd</td> 
+    <td>none</td> 
+    <td>使拖放功能。</td> 
+   </tr> 
+   <tr> 
+    <td>disableDnd</td> 
+    <td>none</td> 
+    <td>禁用拖放功能。</td> 
+   </tr> 
+   <tr> 
+    <td>beginEdit</td> 
+    <td>target</td> 
+    <td>开始编辑一个节点。</td> 
+   </tr> 
+   <tr> 
+    <td>endEdit</td> 
+    <td>target</td> 
+    <td>最后编辑的节点。</td> 
+   </tr> 
+   <tr> 
+    <td>cancelEdit</td> 
+    <td>target</td> 
+    <td>取消编辑节点。</td> 
+   </tr> 
+  </tbody>
+ </table> 
+</div>

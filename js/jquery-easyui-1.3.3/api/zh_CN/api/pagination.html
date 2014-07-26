@@ -1,0 +1,182 @@
+<div style="padding:10px"> 
+ <h3>Pagination</h3> 
+ <p>Override defaults with $.fn.pagination.defaults.</p> 
+ <p> The pagination allows the user to navigate data by page. It supports configurable options for page navigation and page length choices. The user can add customize buttons on right of pagination to enhance its functionality. </p> 
+ <img src="api/images/model/pagination.png" /> 
+ <h4>Dependencies</h4> 
+ <ul> 
+  <li>linkbutton</li> 
+ </ul> 
+ <h4>Usage Example</h4> 
+ <p>Create pagination from markup.</p> 
+ <textarea name="code-pagination" class="html">
+	&lt;div id=&quot;pp&quot; class=&quot;easyui-pagination&quot; data-options=&quot;total:2000,pageSize:10&quot; style=&quot;background:#efefef;border:1px solid #ccc;&quot;&gt;&lt;/div&gt;
+</textarea> 
+ <p>Create pagination using javascript.</p> 
+ <textarea name="code-pagination" class="html">
+	&lt;div id=&quot;pp&quot; style=&quot;background:#efefef;border:1px solid #ccc;&quot;&gt;&lt;/div&gt;
+</textarea> 
+ <textarea name="code-pagination" class="js">
+	$('#pp').pagination({
+		total:2000,
+		pageSize:10
+	});
+</textarea> 
+ <p> Let's create ajax pagination with panel and pagination plugins. When the user select a new page, the panel will display the corresponding content of specified page. </p> 
+ <textarea name="code-pagination" class="html">
+	&lt;div id=&quot;content&quot; class=&quot;easyui-panel&quot; style=&quot;height:200px&quot;
+			data-options=&quot;href:'show_content.php?page=1'&quot;&gt;
+	&lt;/div&gt;
+	&lt;div class=&quot;easyui-pagination&quot; style=&quot;border:1px solid #ccc;&quot;
+			data-options=&quot;
+				total: 2000,
+				pageSize: 10,
+				onSelectPage: function(pageNumber, pageSize){
+					$('#content').panel('refresh', 'show_content.php?page='+pageNumber);
+				}&quot;&gt;
+	&lt;/div&gt;
+</textarea> 
+ <p> The panel on top display the first page content by default. When the user navigate the page, the 'onSelectPage' event will be triggered, in which we call 'refresh' method for the content panel to load new page content with a new URL parameter. </p> 
+ <h4>Properties</h4> 
+ <table class="doc-table"> 
+  <tbody>
+   <tr> 
+    <th><strong>Name</strong></th> 
+    <th><strong>Type</strong></th> 
+    <th><strong>Description</strong></th> 
+    <th><strong>Default</strong></th> 
+   </tr> 
+   <tr> 
+    <td>total</td> 
+    <td>number</td> 
+    <td>总的记录，应设置分页时创建。</td> 
+    <td>1</td> 
+   </tr> 
+   <tr> 
+    <td>pageSize</td> 
+    <td>number</td> 
+    <td>页面大小。</td> 
+    <td>10</td> 
+   </tr> 
+   <tr> 
+    <td>pageNumber</td> 
+    <td>number</td> 
+    <td>显示页码分页时创建。</td> 
+    <td>1</td> 
+   </tr> 
+   <tr> 
+    <td>pageList</td> 
+    <td>array</td> 
+    <td>用户可以更改页面尺寸。pagelist属性定义的多少可以改变大小。代码示例：</td> 
+    <td>[10,20,30,50]</td> 
+   </tr> 
+   <tr> 
+    <td>loading</td> 
+    <td>boolean</td> 
+    <td>如果定义数据加载。</td> 
+    <td>false</td> 
+   </tr> 
+   <tr> 
+    <td>buttons</td> 
+    <td>array</td> 
+    <td>定义自定义按钮，每个按钮包含两个属性：iconcls：CSS类，将显示一个背景图像处理程序：一个处理函数当按钮被单击自定义按钮可以宣布从标记：</td> 
+    <td>null</td> 
+   </tr> 
+   <tr> 
+    <td>showPageList</td> 
+    <td>boolean</td> 
+    <td>如果定义显示页面列表。</td> 
+    <td>true</td> 
+   </tr> 
+   <tr> 
+    <td>showRefresh</td> 
+    <td>boolean</td> 
+    <td>如果定义显示的刷新按钮。</td> 
+    <td>true</td> 
+   </tr> 
+   <tr> 
+    <td>beforePageText</td> 
+    <td>string</td> 
+    <td>显示输入组件在一个标签。</td> 
+    <td>Page</td> 
+   </tr> 
+   <tr> 
+    <td>afterPageText</td> 
+    <td>string</td> 
+    <td>显示输入组件标签后。</td> 
+    <td>of {pages}</td> 
+   </tr> 
+   <tr> 
+    <td>displayMsg</td> 
+    <td>string</td> 
+    <td>显示一个页面的信息。</td> 
+    <td>Displaying {from} to {to} of {total} items</td> 
+   </tr> 
+  </tbody>
+ </table> 
+ <h4>Events</h4> 
+ <table class="doc-table"> 
+  <tbody>
+   <tr> 
+    <th><strong>Name</strong></th> 
+    <th><strong>Parameters</strong></th> 
+    <th><strong>Description</strong></th> 
+   </tr> 
+   <tr> 
+    <td>onSelectPage</td> 
+    <td>pageNumber, pageSize</td> 
+    <td>当用户选择一个新的页面的火灾。回调函数有两个参数：当前页数：新的页号页大小：新的页面大小的代码示例：</td> 
+   </tr> 
+   <tr> 
+    <td>onBeforeRefresh</td> 
+    <td>pageNumber, pageSize</td> 
+    <td>在刷新按钮被单击的火灾，返回false来取消刷新操作。</td> 
+   </tr> 
+   <tr> 
+    <td>onRefresh</td> 
+    <td>pageNumber, pageSize</td> 
+    <td>火灾后刷新。</td> 
+   </tr> 
+   <tr> 
+    <td>onChangePageSize</td> 
+    <td>pageSize</td> 
+    <td>火灾时用户更改页面尺寸。</td> 
+   </tr> 
+  </tbody>
+ </table> 
+ <h4>Methods</h4> 
+ <table class="doc-table"> 
+  <tbody>
+   <tr> 
+    <th><strong>Name</strong></th> 
+    <th><strong>Parameter</strong></th> 
+    <th><strong>Description</strong></th> 
+   </tr> 
+   <tr> 
+    <td>options</td> 
+    <td>none</td> 
+    <td>返回选择对象。</td> 
+   </tr> 
+   <tr> 
+    <td>loading</td> 
+    <td>none</td> 
+    <td>使分页成为承载状况。</td> 
+   </tr> 
+   <tr> 
+    <td>loaded</td> 
+    <td>none</td> 
+    <td>使分页变得加载状态。</td> 
+   </tr> 
+   <tr> 
+    <td>refresh</td> 
+    <td>options</td> 
+    <td>刷新和显示寻呼信息。该方法可从版本1.3。代码示例：</td> 
+   </tr> 
+   <tr> 
+    <td>select</td> 
+    <td>page</td> 
+    <td>选择一个新的页面。1页的索引开始。该方法可从版本1.3。代码示例：</td> 
+   </tr> 
+  </tbody>
+ </table> 
+</div>

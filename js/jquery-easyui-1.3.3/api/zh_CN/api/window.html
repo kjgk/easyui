@@ -1,0 +1,174 @@
+<div style="padding:10px"> 
+ <h3>Window</h3> 
+ <p>Extend from $.fn.panel.defaults. Override defaults with $.fn.window.defaults.</p> 
+ <p> The window is a floated and draggable panel that can be used as an application window. By default a window can be moved, resized and closed. Its content can also be defined with either as static html or loaded dynamically via ajax. </p> 
+ <img src="api/images/model/window.png" /> 
+ <h4>Dependencies</h4> 
+ <ul> 
+  <li>draggable</li> 
+  <li>resizable</li> 
+  <li>panel</li> 
+ </ul> 
+ <h4>Usage Example</h4> 
+ <h5>Create Window</h5> 
+ <p>1. Create window from markup.</p> 
+ <textarea name="code-window" class="html">
+	&lt;div id=&quot;win&quot; class=&quot;easyui-window&quot; title=&quot;My Window&quot; style=&quot;width:600px;height:400px&quot;
+			data-options=&quot;iconCls:'icon-save',modal:true&quot;&gt;
+		Window Content
+	&lt;/div&gt;
+</textarea> 
+ <p>2. Create window using javascript.</p> 
+ <textarea name="code-window" class="html">
+	&lt;div id=&quot;win&quot;&gt;&lt;/div&gt;
+</textarea> 
+ <textarea name="code-window" class="js">
+	$('#win').window({
+		width:600,
+		height:400,
+		modal:true
+	});
+</textarea> 
+ <p>3. Create window with complext layout.</p> 
+ <p> As usual you can define the window layout. The example below shows how to split window area into two parts: the north and center. </p> 
+ <textarea name="code-window" class="html">
+	&lt;div id=&quot;win&quot; class=&quot;easyui-window&quot; title=&quot;My Window&quot; style=&quot;width:600px;height:400px&quot;
+			data-options=&quot;iconCls:'icon-save',modal:true&quot;&gt;
+		&lt;div class=&quot;easyui-layout&quot; data-options=&quot;fit:true&quot;&gt;
+			&lt;div data-options=&quot;region:'north',split:true&quot; style=&quot;height:100px&quot;&gt;&lt;/div&gt;
+			&lt;div data-options=&quot;region:'center'&quot;&gt;
+				The Content.
+			&lt;/div&gt;
+		&lt;/div&gt;
+	&lt;/div&gt;
+</textarea> 
+ <br /> 
+ <h5>Some actions with window</h5> 
+ <p>Open and close window.</p> 
+ <textarea name="code-window" class="js">
+	$('#win').window('open');  // open a window
+	$('#win').window('close');  // close a window
+</textarea> 
+ <p>Load window content via ajax.</p> 
+ <textarea name="code-window" class="js">
+	$('#win').window('refresh', 'get_content.php');
+</textarea> 
+ <br /> 
+ <h4>Properties</h4> 
+ <p>The properties extend from panel, below is the overridden and added properties for window.</p> 
+ <table class="doc-table"> 
+  <tbody>
+   <tr> 
+    <th><strong>Name</strong></th> 
+    <th><strong>Type</strong></th> 
+    <th><strong>Description</strong></th> 
+    <th><strong>Default</strong></th> 
+   </tr> 
+   <tr> 
+    <td>title</td> 
+    <td>string</td> 
+    <td>窗口的标题文本。</td> 
+    <td>New Window</td> 
+   </tr> 
+   <tr> 
+    <td>collapsible</td> 
+    <td>boolean</td> 
+    <td>如果定义显示可折叠按钮。</td> 
+    <td>true</td> 
+   </tr> 
+   <tr> 
+    <td>minimizable</td> 
+    <td>boolean</td> 
+    <td>如果定义显示可最小化按钮。</td> 
+    <td>true</td> 
+   </tr> 
+   <tr> 
+    <td>maximizable</td> 
+    <td>boolean</td> 
+    <td>如果定义显示的maximizable按钮。</td> 
+    <td>true</td> 
+   </tr> 
+   <tr> 
+    <td>closable</td> 
+    <td>boolean</td> 
+    <td>如果定义显示关闭按钮。</td> 
+    <td>true</td> 
+   </tr> 
+   <tr> 
+    <td>closed</td> 
+    <td>boolean</td> 
+    <td>定义如果关闭窗口。</td> 
+    <td>false</td> 
+   </tr> 
+   <tr> 
+    <td>zIndex</td> 
+    <td>number</td> 
+    <td>窗口的Z指数，增加从它。</td> 
+    <td>9000</td> 
+   </tr> 
+   <tr> 
+    <td>draggable</td> 
+    <td>boolean</td> 
+    <td>如果定义窗口可以拖动。</td> 
+    <td>true</td> 
+   </tr> 
+   <tr> 
+    <td>resizable</td> 
+    <td>boolean</td> 
+    <td>如果定义窗口大小可以。</td> 
+    <td>true</td> 
+   </tr> 
+   <tr> 
+    <td>shadow</td> 
+    <td>boolean</td> 
+    <td>如果设置为true，当窗口显示阴影会还。</td> 
+    <td>true</td> 
+   </tr> 
+   <tr> 
+    <td>inline</td> 
+    <td>boolean</td> 
+    <td>定义了如何在窗口，真的呆在它的父，假去上的所有元素。</td> 
+    <td>false</td> 
+   </tr> 
+   <tr> 
+    <td>modal</td> 
+    <td>boolean</td> 
+    <td>如果定义的窗口是一个模态窗口。</td> 
+    <td>true</td> 
+   </tr> 
+  </tbody>
+ </table> 
+ <h4>Events</h4> 
+ <p>The events extend from panel.</p> 
+ <h4>Methods</h4> 
+ <p>The methods extend from panel, below is the added methods for window.</p> 
+ <table class="doc-table"> 
+  <tbody>
+   <tr> 
+    <th><strong>Name</strong></th> 
+    <th><strong>Parameter</strong></th> 
+    <th><strong>Description</strong></th> 
+   </tr> 
+   <tr> 
+    <td>window</td> 
+    <td>none</td> 
+    <td>返回对象的外窗。</td> 
+   </tr> 
+   <tr> 
+    <td>hcenter</td> 
+    <td>none</td> 
+    <td>中心窗口只水平。该方法可从1.3.1版。</td> 
+   </tr> 
+   <tr> 
+    <td>vcenter</td> 
+    <td>none</td> 
+    <td>中心窗口垂直。该方法可从1.3.1版。</td> 
+   </tr> 
+   <tr> 
+    <td>center</td> 
+    <td>none</td> 
+    <td>中心在屏幕上的窗口。该方法可从1.3.1版。</td> 
+   </tr> 
+  </tbody>
+ </table> 
+</div>

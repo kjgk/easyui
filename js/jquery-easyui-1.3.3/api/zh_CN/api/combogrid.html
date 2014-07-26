@@ -1,0 +1,107 @@
+<div style="padding:10px"> 
+ <h3>ComboGrid</h3> 
+ <p>Extend from $.fn.combo.defaults and $.fn.datagrid.defaults. Override defaults with $.fn.combogrid.defaults.</p> 
+ <p> The combogrid combines a editable text box with drop-down datagrid panel, from which enables users to quickly find and select. The combogrid provides keyboard navigation support for selecting an item. </p> 
+ <img src="api/images/model/combogrid.png" /> 
+ <h4>Dependencies</h4> 
+ <ul> 
+  <li>combo</li> 
+  <li>datagrid</li> 
+ </ul> 
+ <h4>Usage Example</h4> 
+ <h5>Create ComboGrid</h5> 
+ <p>1. Create a combogrid from markup.</p> 
+ <textarea name="code-combogrid" class="html">	&lt;select id=&quot;cc&quot; class=&quot;easyui-combogrid&quot; name=&quot;dept&quot; style=&quot;width:250px;&quot;			data-options=&quot;				panelWidth:450,				value:'006',				idField:'code',				textField:'name',				url:'datagrid_data.json',				columns:[[					{field:'code',title:'Code',width:60},					{field:'name',title:'Name',width:100},					{field:'addr',title:'Address',width:120},					{field:'col4',title:'Col41',width:100}				]]			&quot;&gt;&lt;/select&gt;</textarea> 
+ <p> 2. The combogrid can be created from existing &lt;select&gt; or &lt;input&gt; element using javascript. </p> 
+ <textarea name="code-combogrid" class="html">	&lt;input id=&quot;cc&quot; name=&quot;dept&quot; value=&quot;01&quot; /&gt;</textarea> 
+ <textarea name="code-combogrid" class="js">	$('#cc').combogrid({		panelWidth:450,		value:'006',	 		idField:'code',		textField:'name',		url:'datagrid_data.json',		columns:[[			{field:'code',title:'Code',width:60},			{field:'name',title:'Name',width:100},			{field:'addr',title:'Address',width:120},			{field:'col4',title:'Col41',width:100}		]]	});</textarea> 
+ <br /> 
+ <h5>Autocomplete Functionality</h5> 
+ <p> Let's add advanced auto-complete functionality to the combogrid. The drop-down datagrid will display the possible results according to the user types. </p> 
+ <textarea name="code-combogrid" class="js">$('#cc').combogrid({	delay: 500,	mode: 'remote',	url: 'get_data.php',	idField: 'id',	textField: 'name',	columns: [[		{field:'code',title:'Code',width:120,sortable:true},		{field:'name',title:'Name',width:400,sortable:true}	]]});</textarea> 
+ <p> On server side, the 'q' parameter must be retrieve first. The user can query the database and then return an sql result in JSON format to the browser. </p> 
+ <p> get_data.php: </p> 
+ <textarea name="code-combogrid" class="js">$q = isset($_POST['q']) ? $_POST['q'] : '';  // the request parameter// query database and return JSON result data$rs = mysql_query(&quot;select * from item where name like '$q%'&quot;);echo json_encode(...);</textarea> 
+ <br /> 
+ <h4>Properties</h4> 
+ <p>The properties extend from combo and datagrid, below is the added properties for combogrid.</p> 
+ <table class="doc-table"> 
+  <tbody>
+   <tr> 
+    <th><strong>Name</strong></th> 
+    <th><strong>Type</strong></th> 
+    <th><strong>Description</strong></th> 
+    <th><strong>Default</strong></th> 
+   </tr> 
+   <tr> 
+    <td>loadMsg</td> 
+    <td>string</td> 
+    <td>邮件时显示DataGrid加载远程数据。</td> 
+    <td>null</td> 
+   </tr> 
+   <tr> 
+    <td>idField</td> 
+    <td>string</td> 
+    <td>ID字段名称。</td> 
+    <td>null</td> 
+   </tr> 
+   <tr> 
+    <td>textField</td> 
+    <td>string</td> 
+    <td>将显示在文本框中的文本字段。</td> 
+    <td>null</td> 
+   </tr> 
+   <tr> 
+    <td>mode</td> 
+    <td>string</td> 
+    <td>定义了如何加载数据时，文本更改DataGrid。设置“远程”如果从服务器的combogrid荷载。当设置为“远程”模式，被发送的HTTP请求参数命名的“Q”服务器检索新的数据是用户类型。</td> 
+    <td>local</td> 
+   </tr> 
+   <tr> 
+    <td>filter</td> 
+    <td>function(q, row)</td> 
+    <td>定义了如何选择本地的数据时，“模式”设置为“本地”。返回true以选择行。代码示例：\r $（“# CC）。combogrid（{ \r过滤器：功能（Q，行）{ var = $（这\r选择）。combogrid（选项”）；\r返回行[选择]。文本框。指数（Q）= = 0；} \r \r；</td> 
+    <td></td> 
+   </tr> 
+  </tbody>
+ </table> 
+ <br /> 
+ <h4>Events</h4> 
+ <p>The events extend from combo and datagrid.</p> 
+ <h4>Methods</h4> 
+ <p>The methods extend from combo, below is the added or overriden methods for combogrid.</p> 
+ <table class="doc-table"> 
+  <tbody>
+   <tr> 
+    <th><strong>Name</strong></th> 
+    <th><strong>Parameter</strong></th> 
+    <th><strong>Description</strong></th> 
+   </tr> 
+   <tr> 
+    <td>options</td> 
+    <td>none</td> 
+    <td>返回选择对象。</td> 
+   </tr> 
+   <tr> 
+    <td>grid</td> 
+    <td>none</td> 
+    <td>返回DataGrid对象。下面的例子展示了如何选定行：\r VaR G =（“CC”#美元）。combogrid（'grid '）；\/\/获取DataGrid对象\r VaR R = g.datagrid（'getselected '）；\/\/获取选定行\r警报（r.name；</td> 
+   </tr> 
+   <tr> 
+    <td>setValues</td> 
+    <td>values</td> 
+    <td>设置组件的值的数组。代码示例：\r $（“# CC）。combogrid（'setvalues’，[ '001’，'007’]；</td> 
+   </tr> 
+   <tr> 
+    <td>setValue</td> 
+    <td>value</td> 
+    <td>设置组件的值。代码示例：\r $（“# CC）。combogrid（'setvalue’，‘002’；</td> 
+   </tr> 
+   <tr> 
+    <td>clear</td> 
+    <td>none</td> 
+    <td>明确的分量值。</td> 
+   </tr> 
+  </tbody>
+ </table> 
+</div>

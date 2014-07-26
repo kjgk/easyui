@@ -1,0 +1,97 @@
+<div style="padding:10px"> 
+ <h3>Droppable</h3> 
+ <p>Override defaults with $.fn.droppable.defaults.</p> 
+ <h4>Usage Example</h4> 
+ <p>Create a droppable area from markup.</p> 
+ <textarea name="code-droppable" class="html">
+	&lt;div id=&quot;dd&quot; class=&quot;easyui-droppable&quot; data-options=&quot;accept:'#d1,#d3'&quot; style=&quot;width:100px;height:100px;&quot;&gt;&lt;/div&gt;
+</textarea> 
+ <p>Create a droppable area using javascript.</p> 
+ <textarea name="code-droppable" class="html">
+	&lt;div id=&quot;dd&quot; style=&quot;width:100px;height:100px;&quot;&gt;&lt;/div&gt;
+</textarea> 
+ <textarea name="code-droppable" class="js">
+	$('#dd').droppable({
+		accept:'#d1,#d3'
+	});
+</textarea> 
+ <br /> 
+ <h4>Properties</h4> 
+ <table class="doc-table"> 
+  <tbody>
+   <tr> 
+    <th><strong>Name</strong></th> 
+    <th><strong>Type</strong></th> 
+    <th><strong>Description</strong></th> 
+    <th><strong>Default</strong></th> 
+   </tr> 
+   <tr> 
+    <td>accept</td> 
+    <td>selector</td> 
+    <td>确定可拖动的元素会被接受</td> 
+    <td>null</td> 
+   </tr> 
+   <tr> 
+    <td>disabled</td> 
+    <td>boolean</td> 
+    <td>真正的停止空投</td> 
+    <td>false</td> 
+   </tr> 
+  </tbody>
+ </table> 
+ <h4>Events</h4> 
+ <table class="doc-table"> 
+  <tbody>
+   <tr> 
+    <th><strong>Name</strong></th> 
+    <th><strong>Parameters</strong></th> 
+    <th><strong>Description</strong></th> 
+   </tr> 
+   <tr> 
+    <td>onDragEnter</td> 
+    <td>e,source</td> 
+    <td>火灾时，拖动元素被拖进。源参数表明，拖到DOM元素。</td> 
+   </tr> 
+   <tr> 
+    <td>onDragOver</td> 
+    <td>e,source</td> 
+    <td>火灾时，拖动元素被拖到。源参数表明，拖到DOM元素。</td> 
+   </tr> 
+   <tr> 
+    <td>onDragLeave</td> 
+    <td>e,source</td> 
+    <td>火灾时，拖动元素被拖走。源参数表明，拖到DOM元素。</td> 
+   </tr> 
+   <tr> 
+    <td>onDrop</td> 
+    <td>e,source</td> 
+    <td>火灾时，拖动元素掉。源参数表明，拖到DOM元素。</td> 
+   </tr> 
+  </tbody>
+ </table> 
+ <h4>Methods</h4> 
+ <table class="doc-table"> 
+  <tbody>
+   <tr> 
+    <th><strong>Name</strong></th> 
+    <th><strong>Parameter</strong></th> 
+    <th><strong>Description</strong></th> 
+   </tr> 
+   <tr> 
+    <td>options</td> 
+    <td>none</td> 
+    <td>返回选择对象。</td> 
+   </tr> 
+   <tr> 
+    <td>enable</td> 
+    <td>none</td> 
+    <td>使可删除的功能。</td> 
+   </tr> 
+   <tr> 
+    <td>disable</td> 
+    <td>none</td> 
+    <td>禁用可删除的功能。</td> 
+   </tr> 
+  </tbody>
+ </table> 
+</div>

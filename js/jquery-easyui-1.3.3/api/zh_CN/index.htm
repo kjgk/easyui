@@ -1,0 +1,187 @@
+<HTML>
+	<HEAD> 
+	<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<TITLE>Documentation - jQuery EasyUI</TITLE>		 
+	<LINK href="api/easyui.css" rel="stylesheet" type="text/css">         
+	<LINK href="api/main.css" rel="stylesheet" type="text/css">		 
+	<LINK href="api/SyntaxHighlighter.css" rel="stylesheet" type="text/css">		 
+	<SCRIPT src="api/shCore.js"></SCRIPT>
+	<SCRIPT src="api/shBrushJScript.js"></SCRIPT> 
+	<SCRIPT src="api/shBrushXml.js"></SCRIPT> 
+	<SCRIPT src="api/jquery-1.6.1.min.js" type="text/javascript"></SCRIPT> 
+	<SCRIPT src="api/jquery.easyui.min.js" type="text/javascript"></SCRIPT> 
+	<SCRIPT type="text/javascript">
+		$(function(){
+			$('#tt').tabs({
+				onLoad:function(panel) {
+					var plugin = panel.panel('options').title;
+					dp.SyntaxHighlighter.ClipboardSwf = '/SyntaxHighlighter/Scripts/clipboard.swf';
+					dp.SyntaxHighlighter.HighlightAll('code-' + plugin);
+				},
+				onAdd:function(title,index){
+					window.setTimeout(function(){
+						dp.SyntaxHighlighter.ClipboardSwf = '/SyntaxHighlighter/Scripts/clipboard.swf';
+						dp.SyntaxHighlighter.HighlightAll('code-' + title);
+					},10);
+					
+				}
+			});
+			tabCloseEven();
+		});
+		function open1(plugin){
+			if ($('#tt').tabs('exists',plugin)){
+				$('#tt').tabs('select', plugin);
+			} else {
+				$('#tt').tabs('add',{
+					title:plugin,
+					content:jQuery("<div><div>").load("api/"+plugin+".html").html(),
+					closable:true,
+					extractor:function(data){
+						alert(data);
+					}
+				});
+			}
+			tabClose();
+		}
+		//绑定右键菜单事件
+		function tabCloseEven() {
+			//关闭当前
+			$('#mm-tabclose').click(function(){
+				var currtab_title = $('#mm').data("currtab");
+				$('#tt').tabs('close',currtab_title);
+			})
+			//全部关闭
+			$('#mm-tabcloseall').click(function(){
+				$('.tabs-inner span').each(function(i,n){
+					var t = $(n).text();
+					if(t != 'welcome') {
+						$('#tt').tabs('close',t);
+					}
+				});
+			});
+			//关闭除当前之外的TAB
+			$('#mm-tabcloseother').click(function(){
+				var prevall = $('.tabs-selected').prevAll();
+				var nextall = $('.tabs-selected').nextAll();		
+				if(prevall.length>0){
+					prevall.each(function(i,n){
+						var t=$('a:eq(0) span',$(n)).text();
+						if(t != 'welcome') {
+							$('#tt').tabs('close',t);
+						}
+					});
+				}
+				if(nextall.length>0) {
+					nextall.each(function(i,n){
+						var t=$('a:eq(0) span',$(n)).text();
+						if(t != 'welcome') {
+							$('#tt').tabs('close',t);
+						}
+					});
+				}
+				return false;
+			});
+		}
+		function tabClose() {
+			/*双击关闭TAB选项卡*/
+			$(".tabs-inner").dblclick(function(){
+				var subtitle = $(this).children(".tabs-closable").text();
+				$('#tt').tabs('close',subtitle);
+			})
+			/*为选项卡绑定右键*/
+			$(".tabs-inner").bind('contextmenu',function(e){
+				$('#mm').menu('show', {
+					left: e.pageX,
+					top: e.pageY
+				});
+
+				var subtitle =$(this).children(".tabs-closable").text();
+
+				$('#mm').data("currtab",subtitle);
+				$('#tt').tabs('select',subtitle);
+				return false;
+			});
+		}
+	</SCRIPT>
+	</HEAD>	 
+	<BODY class="easyui-layout" style="text-align: left;">
+		<DIV style="background: rgb(102, 102, 102); " border="false" region="north">
+			<DIV id="header-inner" style="font-size:18px;color:white;text-align: left;font-weight: bolder">
+				jQuery EasyUI 1.3.3 API
+			</DIV>
+		</DIV>
+		<DIV title="Plugins" style="padding: 5px; width: 250px;" border="true" minWidth="200" maxWidth="300" region="west" split="true">
+			<ul class="easyui-tree"> 
+			 <li iconcls="icon-base"><span>Base</span>
+			  <ul>
+			   <li iconcls="icon-gears"><a href="#" onclick="open1('parser')">parser</a></li>
+			   <li iconcls="icon-gears"><a href="#" onclick="open1('easyloader')">easyloader</a></li>
+			   <li iconcls="icon-gears"><a href="#" onclick="open1('draggable')">draggable</a></li>
+			   <li iconcls="icon-gears"><a href="#" onclick="open1('droppable')">droppable</a></li>
+			   <li iconcls="icon-gears"><a href="#" onclick="open1('resizable')">resizable</a></li>
+			   <li iconcls="icon-gears"><a href="#" onclick="open1('pagination')">pagination</a></li>
+			   <li iconcls="icon-gears"><a href="#" onclick="open1('searchbox')">searchbox</a></li>
+			   <li iconcls="icon-gears"><a href="#" onclick="open1('progressbar')">progressbar</a></li>
+			   <li iconcls="icon-gears"><a href="#" onclick="open1('tooltip')">tooltip</a></li>
+			  </ul></li>
+			 <li iconcls="icon-layout"><span>Layout</span>
+			  <ul>
+			   <li iconcls="icon-gears"><a href="#" onclick="open1('panel')">panel</a></li>
+			   <li iconcls="icon-gears"><a href="#" onclick="open1('tabs')">tabs</a></li>
+			   <li iconcls="icon-gears"><a href="#" onclick="open1('accordion')">accordion</a></li>
+			   <li iconcls="icon-gears"><a href="#" onclick="open1('layout')">layout</a></li>
+			  </ul></li>
+			 <li iconcls="icon-menu"><span>Menu and Button</span>
+			  <ul>
+			   <li iconcls="icon-gears"><a href="#" onclick="open1('menu')">menu</a></li>
+			   <li iconcls="icon-gears"><a href="#" onclick="open1('linkbutton')">linkbutton</a></li>
+			   <li iconcls="icon-gears"><a href="#" onclick="open1('menubutton')">menubutton</a></li>
+			   <li iconcls="icon-gears"><a href="#" onclick="open1('splitbutton')">splitbutton</a></li>
+			  </ul></li>
+			 <li iconcls="icon-form"><span>Form</span>
+			  <ul>
+			   <li iconcls="icon-gears"><a href="#" onclick="open1('form')">form</a></li>
+			   <li iconcls="icon-gears"><a href="#" onclick="open1('validatebox')">validatebox</a></li>
+			   <li iconcls="icon-gears"><a href="#" onclick="open1('combo')">combo</a></li>
+			   <li iconcls="icon-gears"><a href="#" onclick="open1('combobox')">combobox</a></li>
+			   <li iconcls="icon-gears"><a href="#" onclick="open1('combotree')">combotree</a></li>
+			   <li iconcls="icon-gears"><a href="#" onclick="open1('combogrid')">combogrid</a></li>
+			   <li iconcls="icon-gears"><a href="#" onclick="open1('numberbox')">numberbox</a></li>
+			   <li iconcls="icon-gears"><a href="#" onclick="open1('datebox')">datebox</a></li>
+			   <li iconcls="icon-gears"><a href="#" onclick="open1('datetimebox')">datetimebox</a></li>
+			   <li iconcls="icon-gears"><a href="#" onclick="open1('calendar')">calendar</a></li>
+			   <li iconcls="icon-gears"><a href="#" onclick="open1('spinner')">spinner</a></li>
+			   <li iconcls="icon-gears"><a href="#" onclick="open1('numberspinner')">numberspinner</a></li>
+			   <li iconcls="icon-gears"><a href="#" onclick="open1('timespinner')">timespinner</a></li>
+			   <li iconcls="icon-gears"><a href="#" onclick="open1('slider')">slider</a></li>
+			  </ul></li>
+			 <li iconcls="icon-window"><span>Window</span>
+			  <ul>
+			   <li iconcls="icon-gears"><a href="#" onclick="open1('window')">window</a></li>
+			   <li iconcls="icon-gears"><a href="#" onclick="open1('dialog')">dialog</a></li>
+			   <li iconcls="icon-gears"><a href="#" onclick="open1('messager')">messager</a></li>
+			  </ul></li>
+			 <li iconcls="icon-datagrid"><span>DataGrid and Tree</span>
+			  <ul>
+			   <li iconcls="icon-gears"><a href="#" onclick="open1('datagrid')">datagrid</a></li>
+			   <li iconcls="icon-gears"><a href="#" onclick="open1('propertygrid')">propertygrid</a></li>
+			   <li iconcls="icon-gears"><a href="#" onclick="open1('tree')">tree</a></li>
+			   <li iconcls="icon-gears"><a href="#" onclick="open1('treegrid')">treegrid</a></li>
+			  </ul></li> 
+			</ul>
+		</DIV>
+		<DIV border="true" region="center">
+			<DIV id="tt" border="false" plain="true" fit="true">
+				<DIV title="welcome" href="api/welcome.html"></DIV>
+			</DIV>
+		</DIV>
+		<div region="south" border="false" id="south"><center>zliuyao2010@163.com</center></div>
+	
+		<div id="mm" class="easyui-menu cs-tab-menu">
+			<div id="mm-tabclose">关闭</div>
+			<div class="menu-sep"></div>
+			<div id="mm-tabcloseother">关闭其他</div>
+			<div id="mm-tabcloseall">关闭全部</div>
+		</div>
+	</BODY>
+</HTML>

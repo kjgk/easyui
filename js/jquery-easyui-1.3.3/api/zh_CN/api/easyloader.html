@@ -1,0 +1,129 @@
+<div style="padding:10px"> 
+ <h3>EasyLoader</h3> 
+ <h4>Usage</h4> 
+ <h5>Load EasyUI module</h5> 
+ <pre name="code-easyloader" class="JScript">
+	easyloader.base = '../';    // set the easyui base directory
+	easyloader.load('messager', function(){        // load the specified module
+		$.messager.alert('Title', 'load ok');
+	});
+</pre> 
+ <h5>Load script from an absolute url</h5> 
+ <pre name="code-easyloader" class="JScript">
+	using('http://code.jquery.com/jquery-1.4.4.min.js', function(){
+		// ...
+	});
+</pre> 
+ <h5>Load script from relative url</h5> 
+ <pre name="code-easyloader" class="JScript">
+	// the script path relative to easyui directory
+	using('./myscript.js', function(){
+		// ...
+	});
+</pre> 
+ <h4>Properties</h4> 
+ <table class="doc-table"> 
+  <tbody>
+   <tr> 
+    <th><strong>Name</strong></th> 
+    <th><strong>Type</strong></th> 
+    <th><strong>Description</strong></th> 
+    <th><strong>Default</strong></th> 
+   </tr> 
+   <tr> 
+    <td>modules</td> 
+    <td>object</td> 
+    <td>预定义的模块。</td> 
+    <td></td> 
+   </tr> 
+   <tr> 
+    <td>locales</td> 
+    <td>object</td> 
+    <td>预定义的地方。</td> 
+    <td></td> 
+   </tr> 
+   <tr> 
+    <td>base</td> 
+    <td>string</td> 
+    <td>该easyui基目录，必须以“\/”。</td> 
+    <td>The base directory will be auto setted relative to easyload.js</td> 
+   </tr> 
+   <tr> 
+    <td>theme</td> 
+    <td>string</td> 
+    <td>在“主题”目录定义的主题的名称</td> 
+    <td>default</td> 
+   </tr> 
+   <tr> 
+    <td>css</td> 
+    <td>boolean</td> 
+    <td>如果定义加载CSS文件时加载的模块</td> 
+    <td>true</td> 
+   </tr> 
+   <tr> 
+    <td>locale</td> 
+    <td>string</td> 
+    <td>区域名称</td> 
+    <td>null</td> 
+   </tr> 
+   <tr> 
+    <td>timeout</td> 
+    <td>number</td> 
+    <td>超时值以毫秒。火灾如果超时。</td> 
+    <td>2000</td> 
+   </tr> 
+  </tbody>
+ </table> 
+ <h4>Defined locales</h4> 
+ <ul> 
+  <li>af</li> 
+  <li>bg</li> 
+  <li>ca</li> 
+  <li>cs</li> 
+  <li>cz</li> 
+  <li>da</li> 
+  <li>de</li> 
+  <li>en</li> 
+  <li>es</li> 
+  <li>fr</li> 
+  <li>nl</li> 
+  <li>tr</li> 
+  <li>zh_CN</li> 
+  <li>zh_TW</li> 
+ </ul> 
+ <h4>Events</h4> 
+ <table class="doc-table"> 
+  <tbody>
+   <tr> 
+    <th><strong>Name</strong></th> 
+    <th><strong>Parameters</strong></th> 
+    <th><strong>Description</strong></th> 
+   </tr> 
+   <tr> 
+    <td>onProgress</td> 
+    <td>name</td> 
+    <td>火灾在模块加载成功。</td> 
+   </tr> 
+   <tr> 
+    <td>onLoad</td> 
+    <td>name</td> 
+    <td>火灾时，模块和它的依赖成功加载。</td> 
+   </tr> 
+  </tbody>
+ </table> 
+ <h4>Methods</h4> 
+ <table class="doc-table"> 
+  <tbody>
+   <tr> 
+    <th><strong>Name</strong></th> 
+    <th><strong>Parameter</strong></th> 
+    <th><strong>Description</strong></th> 
+   </tr> 
+   <tr> 
+    <td>load</td> 
+    <td>module, callback</td> 
+    <td>加载指定的模块。当负载成功回调函数将被调用。模块参数的有效类型：一个单一的模块名的模块阵列的CSS文件结束的。CSS的JS文件，最后的js。</td> 
+   </tr> 
+  </tbody>
+ </table> 
+</div>

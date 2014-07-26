@@ -1,0 +1,142 @@
+<div style="padding:10px"> 
+ <h3>LinkButton</h3> 
+ <p>Override defaults with $.fn.linkbutton.defaults.</p> 
+ <p> The linkbutton is used to create a hyperlink button. It is a representation of a normal &lt;a&gt; tag. It can display both an icon and text, or only the icon or text. The button width can dynamic and shrink/expand to fit its text labels. </p> 
+ <img src="api/images/model/linkbutton.png" /> 
+ <h4>Usage Example</h4> 
+ <h5>Create linkbutton</h5> 
+ <p> Create a linkbutton from markup is more easily. </p> 
+ <textarea name="code-linkbutton" class="html">
+	&lt;a id=&quot;btn&quot; href=&quot;#&quot; class=&quot;easyui-linkbutton&quot; data-options=&quot;iconCls:'icon-search'&quot;&gt;easyui&lt;/a&gt;
+</textarea> 
+ <p> Create a linkbutton programmatically is also allowed. </p> 
+ <textarea name="code-linkbutton" class="js">
+	&lt;a id=&quot;btn&quot; href=&quot;#&quot;&gt;easyui&lt;/a&gt;
+	$('#btn').linkbutton({
+		iconCls: 'icon-search'
+	});
+</textarea> 
+ <br /> 
+ <h5>Process clicking on linkbutton.</h5> 
+ <p>Clicking on linkbutton will send the user to other page.</p> 
+ <textarea name="code-linkbutton" class="html">
+	&lt;a href=&quot;otherpage.php&quot; class=&quot;easyui-linkbutton&quot; data-options=&quot;iconCls:'icon-search'&quot;&gt;easyui&lt;/a&gt;
+</textarea> 
+ <p>The example below will alert a message.</p> 
+ <textarea name="code-linkbutton" class="html">
+	&lt;a href=&quot;#&quot; class=&quot;easyui-linkbutton&quot; data-options=&quot;iconCls:'icon-search'&quot;
+			onclick=&quot;javascript:alert('easyui')&quot;&gt;easyui&lt;/a&gt;
+</textarea> 
+ <p>Bind click handler using jQuery.</p> 
+ <textarea name="code-linkbutton" class="html">
+	&lt;a id=&quot;btn&quot; href=&quot;#&quot; class=&quot;easyui-linkbutton&quot; data-options=&quot;iconCls:'icon-search'&quot;&gt;easyui&lt;/a&gt;
+</textarea> 
+ <textarea name="code-linkbutton" class="js">
+$(function(){
+	$('#btn').bind('click', function(){
+		alert('easyui');
+	});
+});
+</textarea> 
+ <br /> 
+ <h4>Properties</h4> 
+ <table class="doc-table"> 
+  <tbody>
+   <tr> 
+    <th><strong>Name</strong></th> 
+    <th><strong>Type</strong></th> 
+    <th><strong>Description</strong></th> 
+    <th><strong>Default</strong></th> 
+   </tr> 
+   <tr> 
+    <td>id</td> 
+    <td>string</td> 
+    <td>此组件的ID属性。</td> 
+    <td>null</td> 
+   </tr> 
+   <tr> 
+    <td>disabled</td> 
+    <td>boolean</td> 
+    <td>真正的关闭按钮</td> 
+    <td>false</td> 
+   </tr> 
+   <tr> 
+    <td>toggle</td> 
+    <td>boolean</td> 
+    <td>真正让用户选择或取消选择开关的状态。此属性是因为1.3.3版。</td> 
+    <td>false</td> 
+   </tr> 
+   <tr> 
+    <td>selected</td> 
+    <td>boolean</td> 
+    <td>如果定义按钮的状态被选择。此属性是因为1.3.3版。</td> 
+    <td>false</td> 
+   </tr> 
+   <tr> 
+    <td>group</td> 
+    <td>string</td> 
+    <td>指示按钮属于的组名称。此属性是因为1.3.3版。</td> 
+    <td>null</td> 
+   </tr> 
+   <tr> 
+    <td>plain</td> 
+    <td>boolean</td> 
+    <td>真实的展现平原效应。</td> 
+    <td>false</td> 
+   </tr> 
+   <tr> 
+    <td>text</td> 
+    <td>string</td> 
+    <td>按钮文本。</td> 
+    <td>''</td> 
+   </tr> 
+   <tr> 
+    <td>iconCls</td> 
+    <td>string</td> 
+    <td>一个CSS类的左侧显示16x16图标。</td> 
+    <td>null</td> 
+   </tr> 
+   <tr> 
+    <td>iconAlign</td> 
+    <td>string</td> 
+    <td>按钮的图标的位置。可能的值是：左，右”。此属性是可用的版本以来1.3.2。</td> 
+    <td>left</td> 
+   </tr> 
+  </tbody>
+ </table> 
+ <h4>Methods</h4> 
+ <table class="doc-table"> 
+  <tbody>
+   <tr> 
+    <th><strong>Name</strong></th> 
+    <th><strong>Parameter</strong></th> 
+    <th><strong>Description</strong></th> 
+   </tr> 
+   <tr> 
+    <td>options</td> 
+    <td>none</td> 
+    <td>返回选择属性。</td> 
+   </tr> 
+   <tr> 
+    <td>disable</td> 
+    <td>none</td> 
+    <td>禁用按钮。代码示例：</td> 
+   </tr> 
+   <tr> 
+    <td>enable</td> 
+    <td>none</td> 
+    <td>使按钮。代码示例：</td> 
+   </tr> 
+   <tr> 
+    <td>select</td> 
+    <td>none</td> 
+    <td>选择按钮。该方法可从1.3.3版。</td> 
+   </tr> 
+   <tr> 
+    <td>unselect</td> 
+    <td>none</td> 
+    <td>取消按钮。该方法可从1.3.3版。</td> 
+   </tr> 
+  </tbody>
+ </table> 
+</div>

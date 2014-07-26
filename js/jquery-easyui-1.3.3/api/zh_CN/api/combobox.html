@@ -1,0 +1,189 @@
+<div style="padding:10px"> 
+ <h3>ComboBox</h3> 
+ <p>Extend from $.fn.combo.defaults. Override defaults with $.fn.combobox.defaults.</p> 
+ <p> The combobox display a editable text box and drop-down list, from which the user can select one or multiple values. The user can type text directly into the top of list, or select one or more of present values from the list. </p> 
+ <img src="api/images/model/combobox.png" /> 
+ <h4>Dependencies</h4> 
+ <ul> 
+  <li>combo</li> 
+ </ul> 
+ <h4>Usage Example</h4> 
+ <p>Create combobox from &lt;select&gt; element with a pre-defined structure.</p> 
+ <textarea name="code-combobox" class="html">	&lt;select id=&quot;cc&quot; class=&quot;easyui-combobox&quot; name=&quot;dept&quot; style=&quot;width:200px;&quot;&gt;		&lt;option value=&quot;aa&quot;&gt;aitem1&lt;/option&gt;		&lt;option&gt;bitem2&lt;/option&gt;		&lt;option&gt;bitem3&lt;/option&gt;		&lt;option&gt;ditem4&lt;/option&gt;		&lt;option&gt;eitem5&lt;/option&gt;	&lt;/select&gt;</textarea> 
+ <p>Create combobox from &lt;input&gt; markup.</p> 
+ <textarea name="code-combobox" class="html">	&lt;input id=&quot;cc&quot; class=&quot;easyui-combobox&quot; name=&quot;dept&quot;		data-options=&quot;valueField:'id',textField:'text',url:'get_data.php'&quot; /&gt;</textarea> 
+ <p>Create combobox using javascript.</p> 
+ <textarea name="code-combobox" class="html">	&lt;input id=&quot;cc&quot; name=&quot;dept&quot; value=&quot;aa&quot;&gt;</textarea> 
+ <textarea name="code-combobox" class="js">	$('#cc').combobox({		url:'combobox_data.json',		valueField:'id',		textField:'text'	});</textarea> 
+ <p>Create two dependent comboboxes.</p> 
+ <textarea name="code-combobox" class="html">	&lt;input id=&quot;cc1&quot; class=&quot;easyui-combobox&quot; data-options=&quot;			valueField: 'id',			textField: 'text',			url: 'get_data1.php',			onSelect: function(rec){				var url = 'get_data2.php?id='+rec.id;				$('#cc2').combobox('reload', url);			}&quot; /&gt;	&lt;input id=&quot;cc2&quot; class=&quot;easyui-combobox&quot; data-options=&quot;valueField:'id',textField:'text'&quot; /&gt;</textarea> 
+ <p>The json data format sample:</p> 
+ <textarea name="code-combobox" class="js">	[{		&quot;id&quot;:1,		&quot;text&quot;:&quot;text1&quot;	},{		&quot;id&quot;:2,		&quot;text&quot;:&quot;text2&quot;	},{		&quot;id&quot;:3,		&quot;text&quot;:&quot;text3&quot;,		&quot;selected&quot;:true	},{		&quot;id&quot;:4,		&quot;text&quot;:&quot;text4&quot;	},{		&quot;id&quot;:5,		&quot;text&quot;:&quot;text5&quot;	}]</textarea> 
+ <br /> 
+ <h4>Properties</h4> 
+ <p>The properties extend from combo, below is the added properties for combobox.</p> 
+ <table class="doc-table"> 
+  <tbody>
+   <tr> 
+    <th><strong>Name</strong></th> 
+    <th><strong>Type</strong></th> 
+    <th><strong>Description</strong></th> 
+    <th><strong>Default</strong></th> 
+   </tr> 
+   <tr> 
+    <td>valueField</td> 
+    <td>string</td> 
+    <td>底层的数据值名称绑定到该控件。</td> 
+    <td>value</td> 
+   </tr> 
+   <tr> 
+    <td>textField</td> 
+    <td>string</td> 
+    <td>底层的数据字段的名称绑定到该控件。</td> 
+    <td>text</td> 
+   </tr> 
+   <tr> 
+    <td>mode</td> 
+    <td>string</td> 
+    <td>定义了如何加载列表数据的文本改变时。设置“远程”如果从服务器加载的组合框。当设置为“远程”模式，被发送的HTTP请求参数命名的“Q”服务器检索新的数据是用户类型。</td> 
+    <td>local</td> 
+   </tr> 
+   <tr> 
+    <td>url</td> 
+    <td>string</td> 
+    <td>从一个远程的URL加载列表数据。</td> 
+    <td>null</td> 
+   </tr> 
+   <tr> 
+    <td>method</td> 
+    <td>string</td> 
+    <td>检索数据的HTTP方法。</td> 
+    <td>post</td> 
+   </tr> 
+   <tr> 
+    <td>data</td> 
+    <td>array</td> 
+    <td>列表数据被加载。代码示例：\r &lt;输入class=”easyui ComboBox”数据选项=“\r valuefield：'标签'，\r TextField：“价值”，\r数据：[ { \r标签：“Java”，\r价值：“Java”\r }，{ \r标签：“Perl，\r价值：“Perl“\r }，{ \r标签：“红宝石”，\r价值：“红宝石”\r } ]”</td> 
+    <td>null</td> 
+   </tr> 
+   <tr> 
+    <td>filter</td> 
+    <td>function</td> 
+    <td>定义了如何过滤本地的数据时，“模式”设置为“本地”。函数接受两个参数：问：用户输入的文本。行：表列数据。返回TRUE允许列要显示。代码示例：\r $（“# CC）。组合框（{ \r过滤器：功能（Q，行）{ var = $（这\r选择组合框（选项）。”）；\r返回行[选择]。文本框。指数（Q）= = 0；} \r \r；</td> 
+    <td></td> 
+   </tr> 
+   <tr> 
+    <td>formatter</td> 
+    <td>function</td> 
+    <td>如何使该行的概念界定。函数接受一个参数：行。代码示例：\r $（“# CC）。组合框（{ \r格式化：功能（行）{ var = $（这\r选择组合框（选项）。”）；\r返回行[选择]。如果\r \r；}；</td> 
+    <td></td> 
+   </tr> 
+   <tr> 
+    <td>loader</td> 
+    <td>function(param,success,error)</td> 
+    <td>定义了如何从远程服务器的负荷数据。返回false可以中止这一行动。此功能需要下列参数：参数：参数的对象传递到远程服务器。成功（数据）：将被调用时，检索数据成功回调函数。error()：将被调用时，未能检索数据的回调函数。</td> 
+    <td>json loader</td> 
+   </tr> 
+   <tr> 
+    <td>loadFilter</td> 
+    <td>function(data)</td> 
+    <td>过滤后的数据返回到显示。此属性是因为1.3.3版。</td> 
+    <td></td> 
+   </tr> 
+  </tbody>
+ </table> 
+ <br /> 
+ <h4>Events</h4> 
+ <p>The events extend from combo, below is the added events for combobox.</p> 
+ <table class="doc-table"> 
+  <tbody>
+   <tr> 
+    <th><strong>Name</strong></th> 
+    <th><strong>Parameters</strong></th> 
+    <th><strong>Description</strong></th> 
+   </tr> 
+   <tr> 
+    <td>onBeforeLoad</td> 
+    <td>param</td> 
+    <td>在请求加载数据的火灾，返回false取消此荷载作用。代码示例：\r \/更改请求的数据从服务器在负载参数\r（“CC”#美元）。组合框（{ \r onbeforeload：功能（参数）{ \r param.id = 2；\r param.language =“JS”；} \r \r；</td> 
+   </tr> 
+   <tr> 
+    <td>onLoadSuccess</td> 
+    <td>none</td> 
+    <td>火灾时，远程数据加载成功。</td> 
+   </tr> 
+   <tr> 
+    <td>onLoadError</td> 
+    <td>none</td> 
+    <td>火灾时，远程数据加载错误。</td> 
+   </tr> 
+   <tr> 
+    <td>onSelect</td> 
+    <td>record</td> 
+    <td>火灾时，用户选择一个列表项。</td> 
+   </tr> 
+   <tr> 
+    <td>onUnselect</td> 
+    <td>record</td> 
+    <td>火灾时，用户取消选择列表项。</td> 
+   </tr> 
+  </tbody>
+ </table> 
+ <br /> 
+ <h4>Methods</h4> 
+ <p>The methods extend from combo, below is the added or overridden methods for combobox.</p> 
+ <table class="doc-table"> 
+  <tbody>
+   <tr> 
+    <th><strong>Name</strong></th> 
+    <th><strong>Parameter</strong></th> 
+    <th><strong>Description</strong></th> 
+   </tr> 
+   <tr> 
+    <td>options</td> 
+    <td>none</td> 
+    <td>返回选择对象。</td> 
+   </tr> 
+   <tr> 
+    <td>getData</td> 
+    <td>none</td> 
+    <td>返回加载数据。</td> 
+   </tr> 
+   <tr> 
+    <td>loadData</td> 
+    <td>data</td> 
+    <td>加载列表数据的现场。</td> 
+   </tr> 
+   <tr> 
+    <td>reload</td> 
+    <td>url</td> 
+    <td>请求的远程数据表。通过URL参数覆盖原有的URL值。代码示例：\r $（“# CC）。组合框（'reload’）；／／数据使用旧的URL加载列表\r美元（“# CC）。组合框（'reload’，'get_data。PHP）；\/\/数据使用新的刷新列表</td> 
+   </tr> 
+   <tr> 
+    <td>setValues</td> 
+    <td>values</td> 
+    <td>设置组合框的值的数组。代码示例：\r $（“# CC）。组合框（'setvalues’，[ '001’，'002’]；</td> 
+   </tr> 
+   <tr> 
+    <td>setValue</td> 
+    <td>value</td> 
+    <td>设置组合框的值。代码示例：\r $（“# CC）。组合框（'setvalue’，‘001’；</td> 
+   </tr> 
+   <tr> 
+    <td>clear</td> 
+    <td>none</td> 
+    <td>清除组合框的值。</td> 
+   </tr> 
+   <tr> 
+    <td>select</td> 
+    <td>value</td> 
+    <td>选择指定的项。</td> 
+   </tr> 
+   <tr> 
+    <td>unselect</td> 
+    <td>value</td> 
+    <td>取消指定的项。</td> 
+   </tr> 
+  </tbody>
+ </table> 
+</div>

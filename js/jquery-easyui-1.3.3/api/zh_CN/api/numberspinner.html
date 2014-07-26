@@ -1,0 +1,45 @@
+<div style="padding:10px"> 
+ <h3>NumberSpinner</h3> 
+ <p>Extend from $.fn.spinner.defaults and $.fn.numberbox.defaults. Override defaults with $.fn.numberspinner.defaults.</p> 
+ <p> The numberspinner is created based on spinner and numberbox. It can convert the inputed value into different types such as numeric, percentage, current, etc. It also allows the user to scroll to a desired value using the up/down spinner buttons. </p> 
+ <img src="api/images/model/numberspinner.png" /> 
+ <h4>Dependencies</h4> 
+ <ul> 
+  <li>spinner</li> 
+  <li>numberbox</li> 
+ </ul> 
+ <h4>Usage Example</h4> 
+ <p>Create numberspinner from markup.</p> 
+ <textarea name="code-numberspinner" class="html">	&lt;input id=&quot;ss&quot; class=&quot;easyui-numberspinner&quot; style=&quot;width:80px;&quot;			required=&quot;required&quot; data-options=&quot;min:10,max:100,editable:false&quot;&gt;</textarea> 
+ <p>Create numberspinner using javascript.</p> 
+ <textarea name="code-numberspinner" class="html">	&lt;input id=&quot;ss&quot; required=&quot;required&quot; style=&quot;width:80px;&quot;&gt;</textarea> 
+ <textarea name="code-numberspinner" class="js">	$('#ss').numberspinner({		min: 10,		max: 100,		editable: false	});</textarea> 
+ <p>Create numberspinner and format the number as a currency string.</p> 
+ <textarea name="code-numberspinner" class="html">	&lt;input class=&quot;easyui-numberspinner&quot; value=&quot;1234567890&quot; style=&quot;width:150px;&quot;			data-options=&quot;required:true,precision:2,groupSeparator:',',decimalSeparator:'.',prefix:'$'&quot; /&gt;</textarea> 
+ <br /> 
+ <h4>Properties</h4> 
+ <p>The properties extend from spinner and numberbox.</p> 
+ <h4>Events</h4> 
+ <p>The events extend from spinner.</p> 
+ <h4>Methods</h4> 
+ <p>The methods extend from spinner, below is the overridden methods for numberspinner.</p> 
+ <table class="doc-table"> 
+  <tbody>
+   <tr> 
+    <th><strong>Name</strong></th> 
+    <th><strong>Parameter</strong></th> 
+    <th><strong>Description</strong></th> 
+   </tr> 
+   <tr> 
+    <td>options</td> 
+    <td>none</td> 
+    <td>返回选择对象。</td> 
+   </tr> 
+   <tr> 
+    <td>setValue</td> 
+    <td>value</td> 
+    <td>设置numberspinner价值。代码示例：\r $（“#学生）。numberspinner（'setvalue’，8234725）；\/\/设定值\r VaR（V =美元的#学生）。numberspinner（'getvalue '）；\/\/获取价值\r警报（V</td> 
+   </tr> 
+  </tbody>
+ </table> 
+</div>

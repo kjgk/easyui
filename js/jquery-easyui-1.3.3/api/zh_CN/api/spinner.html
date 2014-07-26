@@ -1,0 +1,156 @@
+<div style="padding:10px"> 
+ <h3>Spinner</h3> 
+ <p>Extend from $.fn.validatebox.defaults. Override defaults with $.fn.spinner.defaults.</p> 
+ <p> The spinner combines a editable text box and two small buttons that let the user choose from a range of values. Similar to the combobox, the spinner allows the user to type in a value but do not has a drop-down list. The spinner is the base component to create other spinner component such as numberspinner, timespinner, etc. </p> 
+ <h4>Dependencies</h4> 
+ <ul> 
+  <li>validatebox</li> 
+ </ul> 
+ <h4>Usage Example</h4> 
+ <p>The spinner should be created using javascript. Creating from markup is not allowed.</p> 
+ <textarea name="code-spinner" class="html">	&lt;input id=&quot;ss&quot; value=&quot;2&quot;&gt;</textarea> 
+ <textarea name="code-spinner" class="js">	$('#ss').spinner({		required:true,		increment:10	});</textarea> 
+ <br /> 
+ <h4>Properties</h4> 
+ <p>The properties extend from validatebox, below is the added properties for spinner.</p> 
+ <table class="doc-table"> 
+  <tbody>
+   <tr> 
+    <th><strong>Name</strong></th> 
+    <th><strong>Type</strong></th> 
+    <th><strong>Description</strong></th> 
+    <th><strong>Default</strong></th> 
+   </tr> 
+   <tr> 
+    <td>width</td> 
+    <td>number</td> 
+    <td>此组件的宽度。</td> 
+    <td>auto</td> 
+   </tr> 
+   <tr> 
+    <td>height</td> 
+    <td>number</td> 
+    <td>此组件的高度。此属性是可用的版本以来1.3.2。</td> 
+    <td>22</td> 
+   </tr> 
+   <tr> 
+    <td>value</td> 
+    <td>string</td> 
+    <td>初始化值。</td> 
+    <td></td> 
+   </tr> 
+   <tr> 
+    <td>min</td> 
+    <td>string</td> 
+    <td>允许的最小值。</td> 
+    <td>null</td> 
+   </tr> 
+   <tr> 
+    <td>max</td> 
+    <td>string</td> 
+    <td>最大允许值。</td> 
+    <td>null</td> 
+   </tr> 
+   <tr> 
+    <td>increment</td> 
+    <td>number</td> 
+    <td>增量值时单击旋转按钮。</td> 
+    <td>1</td> 
+   </tr> 
+   <tr> 
+    <td>editable</td> 
+    <td>boolean</td> 
+    <td>如果用户定义类型的值直接进入现场。</td> 
+    <td>true</td> 
+   </tr> 
+   <tr> 
+    <td>disabled</td> 
+    <td>boolean</td> 
+    <td>如果禁用域定义。</td> 
+    <td>false</td> 
+   </tr> 
+   <tr> 
+    <td>spin</td> 
+    <td>function(down)</td> 
+    <td>一个函数调用时，用户单击微调按钮。“向下”如果用户单击按钮显示参数。</td> 
+    <td></td> 
+   </tr> 
+  </tbody>
+ </table> 
+ <h4>Events</h4> 
+ <table class="doc-table"> 
+  <tbody>
+   <tr> 
+    <th><strong>Name</strong></th> 
+    <th><strong>Parameters</strong></th> 
+    <th><strong>Description</strong></th> 
+   </tr> 
+   <tr> 
+    <td>onSpinUp</td> 
+    <td>none</td> 
+    <td>当用户单击了火灾微调按钮。</td> 
+   </tr> 
+   <tr> 
+    <td>onSpinDown</td> 
+    <td>none</td> 
+    <td>当用户单击向下旋转发射按钮。</td> 
+   </tr> 
+  </tbody>
+ </table> 
+ <h4>Methods</h4> 
+ <p>The methods extend from validatebox, below is the added methods for spinner.</p> 
+ <table class="doc-table"> 
+  <tbody>
+   <tr> 
+    <th><strong>Name</strong></th> 
+    <th><strong>Parameter</strong></th> 
+    <th><strong>Description</strong></th> 
+   </tr> 
+   <tr> 
+    <td>options</td> 
+    <td>none</td> 
+    <td>返回选择对象。</td> 
+   </tr> 
+   <tr> 
+    <td>destroy</td> 
+    <td>none</td> 
+    <td>破坏旋转组件。</td> 
+   </tr> 
+   <tr> 
+    <td>resize</td> 
+    <td>width</td> 
+    <td>复位元件宽度。通过宽度参数覆盖原来的宽度。代码示例：\r $（“#学生）。旋转（'resize '）；\/\/调整原来的宽度\r美元（“#学生）。旋转（'resize’，200）；\/\/调整新的</td> 
+   </tr> 
+   <tr> 
+    <td>enable</td> 
+    <td>none</td> 
+    <td>使元件。</td> 
+   </tr> 
+   <tr> 
+    <td>disable</td> 
+    <td>none</td> 
+    <td>禁用组件。</td> 
+   </tr> 
+   <tr> 
+    <td>getValue</td> 
+    <td>none</td> 
+    <td>得到的分量值。</td> 
+   </tr> 
+   <tr> 
+    <td>setValue</td> 
+    <td>value</td> 
+    <td>设置组件的值。</td> 
+   </tr> 
+   <tr> 
+    <td>clear</td> 
+    <td>none</td> 
+    <td>明确的分量值。</td> 
+   </tr> 
+   <tr> 
+    <td>reset</td> 
+    <td>none</td> 
+    <td>重置组件的值。这种方法可起版1.3.2。</td> 
+   </tr> 
+  </tbody>
+ </table> 
+</div>

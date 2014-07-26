@@ -1,0 +1,124 @@
+<div style="padding:10px"> 
+ <h3>Calendar</h3> 
+ <p>Override defaults with $.fn.calendar.defaults.</p> 
+ <p> The calendar display one month calendar that allows the user to select dates and move to the next or previous month. By default, the first day of week is set to sunday. It can be changed by setting the value of 'firstDay' property. </p> 
+ <img src="api/images/model/calendar.png" /> 
+ <h4>Usage Example</h4> 
+ <p>Create calendar from markup.</p> 
+ <textarea name="code-calendar" class="html">	&lt;div id=&quot;cc&quot; class=&quot;easyui-calendar&quot; style=&quot;width:180px;height:180px;&quot;&gt;&lt;/div&gt;</textarea> 
+ <p>Create calendar using javascript.</p> 
+ <textarea name="code-calendar" class="html">	&lt;div id=&quot;cc&quot; style=&quot;width:180px;height:180px;&quot;&gt;&lt;/div&gt;</textarea> 
+ <textarea name="code-calendar" class="js">	$('#cc').calendar({		current:new Date()	});</textarea> 
+ <br /> 
+ <h4>Properties</h4> 
+ <table class="doc-table"> 
+  <tbody>
+   <tr> 
+    <th><strong>Name</strong></th> 
+    <th><strong>Type</strong></th> 
+    <th><strong>Description</strong></th> 
+    <th><strong>Default</strong></th> 
+   </tr> 
+   <tr> 
+    <td>width</td> 
+    <td>number</td> 
+    <td>日历组件的宽度。</td> 
+    <td>180</td> 
+   </tr> 
+   <tr> 
+    <td>height</td> 
+    <td>number</td> 
+    <td>日历组件的高度。</td> 
+    <td>180</td> 
+   </tr> 
+   <tr> 
+    <td>fit</td> 
+    <td>boolean</td> 
+    <td>当正确设置日历尺寸适合它的父容器。</td> 
+    <td>false</td> 
+   </tr> 
+   <tr> 
+    <td>border</td> 
+    <td>boolean</td> 
+    <td>如果显示定义边界。</td> 
+    <td>true</td> 
+   </tr> 
+   <tr> 
+    <td>firstDay</td> 
+    <td>number</td> 
+    <td>定义了一个星期的第一天。星期日为0，星期一为1，…</td> 
+    <td>0</td> 
+   </tr> 
+   <tr> 
+    <td>weeks</td> 
+    <td>array</td> 
+    <td>列表将显示星期。</td> 
+    <td>['S','M','T','W','T','F','S']</td> 
+   </tr> 
+   <tr> 
+    <td>months</td> 
+    <td>array</td> 
+    <td>列表将显示月。</td> 
+    <td>['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']</td> 
+   </tr> 
+   <tr> 
+    <td>year</td> 
+    <td>number</td> 
+    <td>日历年。下面的示例演示如何使用指定的年份和月份创建日历。\r＜div class=“easyui日历”数据选项=“年：2012，月：6“\/</td> 
+    <td>current year(four digits)</td> 
+   </tr> 
+   <tr> 
+    <td>month</td> 
+    <td>number</td> 
+    <td>日历月。</td> 
+    <td>current month, start with 1</td> 
+   </tr> 
+   <tr> 
+    <td>current</td> 
+    <td>Date</td> 
+    <td>当前日期。</td> 
+    <td>current date</td> 
+   </tr> 
+  </tbody>
+ </table> 
+ <h4>Events</h4> 
+ <table class="doc-table"> 
+  <tbody>
+   <tr> 
+    <th><strong>Name</strong></th> 
+    <th><strong>Parameters</strong></th> 
+    <th><strong>Description</strong></th> 
+   </tr> 
+   <tr> 
+    <td>onSelect</td> 
+    <td>date</td> 
+    <td>火灾时，用户选择一个日期。代码示例：\r $（“# CC）。历（{ \r onselect：功能（日期）{ \r警报（日期。getfullyear() +“”+（日期。getmonth() + 1）+“”+日期。getdate()）；} } \r \r；</td> 
+   </tr> 
+  </tbody>
+ </table> 
+ <h4>Methods</h4> 
+ <table class="doc-table"> 
+  <tbody>
+   <tr> 
+    <th><strong>Name</strong></th> 
+    <th><strong>Parameter</strong></th> 
+    <th><strong>Description</strong></th> 
+   </tr> 
+   <tr> 
+    <td>options</td> 
+    <td>none</td> 
+    <td>返回选择对象。</td> 
+   </tr> 
+   <tr> 
+    <td>resize</td> 
+    <td>none</td> 
+    <td>调整大小的日历。</td> 
+   </tr> 
+   <tr> 
+    <td>moveTo</td> 
+    <td>date</td> 
+    <td>移动到指定日期的日历。代码示例：\r $（“# CC）。历（'moveto”，新的日期（2012，6，1）；</td> 
+   </tr> 
+  </tbody>
+ </table> 
+</div>

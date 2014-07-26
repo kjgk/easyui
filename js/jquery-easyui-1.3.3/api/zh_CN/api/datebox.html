@@ -1,0 +1,119 @@
+<div style="padding:10px"> 
+ <h3>DateBox</h3> 
+ <p>Extend from $.fn.combo.defaults. Override defaults with $.fn.datebox.defaults</p> 
+ <p> The datebox combines a editable text box with drop-down calendar panel that allows the user to select a date. The entered string in the text box can be transformed to a valid date. The selected date can also be formatted as expected. </p> 
+ <img src="api/images/model/datebox.png" /> 
+ <h4>Dependencies</h4> 
+ <ul> 
+  <li>combo</li> 
+  <li>calendar</li> 
+ </ul> 
+ <h4>Usage Example</h4> 
+ <p>Create datebox from markup.</p> 
+ <textarea name="code-datebox" class="html">	&lt;input id=&quot;dd&quot; type=&quot;text&quot; class=&quot;easyui-datebox&quot; required=&quot;required&quot;&gt;&lt;/input&gt;</textarea> 
+ <p>Create datebox using javascript.</p> 
+ <textarea name="code-datebox" class="html">	&lt;input id=&quot;dd&quot; type=&quot;text&quot;&gt;&lt;/input&gt;</textarea> 
+ <textarea name="code-datebox" class="js">	$('#dd').datebox({		required:true	});</textarea> 
+ <br /> 
+ <h4>Properties</h4> 
+ <p>The properties extend from combo, below is the added properties for datebox.</p> 
+ <table class="doc-table"> 
+  <tbody>
+   <tr> 
+    <th><strong>Name</strong></th> 
+    <th><strong>Type</strong></th> 
+    <th><strong>Description</strong></th> 
+    <th><strong>Default</strong></th> 
+   </tr> 
+   <tr> 
+    <td>panelWidth</td> 
+    <td>number</td> 
+    <td>下拉日历面板宽度。</td> 
+    <td>180</td> 
+   </tr> 
+   <tr> 
+    <td>panelHeight</td> 
+    <td>number</td> 
+    <td>下拉日历面板的高度。</td> 
+    <td>auto</td> 
+   </tr> 
+   <tr> 
+    <td>currentText</td> 
+    <td>string</td> 
+    <td>为当前天按钮显示的文本。</td> 
+    <td>Today</td> 
+   </tr> 
+   <tr> 
+    <td>closeText</td> 
+    <td>string</td> 
+    <td>为关闭按钮显示的文本。</td> 
+    <td>Close</td> 
+   </tr> 
+   <tr> 
+    <td>okText</td> 
+    <td>string</td> 
+    <td>为确定按钮显示的文本。</td> 
+    <td>Ok</td> 
+   </tr> 
+   <tr> 
+    <td>disabled</td> 
+    <td>boolean</td> 
+    <td>当真正的禁用场。</td> 
+    <td>false</td> 
+   </tr> 
+   <tr> 
+    <td>formatter</td> 
+    <td>function</td> 
+    <td>函数功能的日期格式，采取“约会”的参数并返回一个字符串值。下面的示例演示如何重写默认的格式化函数。\r美元。fn.datebox.defaults.formatter =函数（日期）{ var \r Y =日期。getfullyear()；\r var m =日期。getmonth() + 1；\r var a日期。getdate()；\r返回M + \/ + D +“\/”</td> 
+    <td></td> 
+   </tr> 
+   <tr> 
+    <td>parser</td> 
+    <td>function</td> 
+    <td>一个函数来解析一个日期字符串，函数将一个“日期”字符串并返回一个日期值。下面的例子展示了如何重写默认的解析函数。\r美元。fn.datebox.defaults.parser =功能（s）{ var \r T =日期。解析（S）；\r！isnan（t））{ \r返回新的日期（T）；} { \r其他\r返回新的date()；\r }</td> 
+    <td></td> 
+   </tr> 
+  </tbody>
+ </table> 
+ <h4>Events</h4> 
+ <table class="doc-table"> 
+  <tbody>
+   <tr> 
+    <th><strong>Name</strong></th> 
+    <th><strong>Parameters</strong></th> 
+    <th><strong>Description</strong></th> 
+   </tr> 
+   <tr> 
+    <td>onSelect</td> 
+    <td>date</td> 
+    <td>火灾时，用户选择一个日期。代码示例：\r $（“# DD”）。datebox（{ \r onselect：功能（日期）{ \r警报（日期。getfullyear() +“”+（日期。getmonth() + 1）+“”+日期。getdate()）；} } \r \r；</td> 
+   </tr> 
+  </tbody>
+ </table> 
+ <h4>Methods</h4> 
+ <p>The methods extend from combo, below is the overridden methods for datebox.</p> 
+ <table class="doc-table"> 
+  <tbody>
+   <tr> 
+    <th><strong>Name</strong></th> 
+    <th><strong>Parameter</strong></th> 
+    <th><strong>Description</strong></th> 
+   </tr> 
+   <tr> 
+    <td>options</td> 
+    <td>none</td> 
+    <td>返回选择对象。</td> 
+   </tr> 
+   <tr> 
+    <td>calendar</td> 
+    <td>none</td> 
+    <td>把日历对象。下面的例子展示了如何把日历对象，然后重新创建它。\r \/得到日历对象\r VaR（C =美元的# DD”）。datebox（'calendar '）；\r \/第一天\/周的星期一\r c.calendar（{ \r第一天：1 \r；</td> 
+   </tr> 
+   <tr> 
+    <td>setValue</td> 
+    <td>value</td> 
+    <td>设置datebox价值。代码示例：\r $（“# DD”）。datebox（'setvalue '，' 6 \/ 1 \/ 2012“）；\/\/设置datebox价值\r VaR（V =美元的# DD”）。datebox（'getvalue’）；／／得到datebox</td> 
+   </tr> 
+  </tbody>
+ </table> 
+</div>

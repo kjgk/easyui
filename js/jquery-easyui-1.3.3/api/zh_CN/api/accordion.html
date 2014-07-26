@@ -1,0 +1,188 @@
+<div style="padding:10px"> 
+ <h3>Accordion</h3> 
+ <p>Override defaults with $.fn.accordion.defaults.</p> 
+ <p> The accordion allows you to provide multiple panels and display one at a time. Each panel has built-in support for expanding and collapsing. Clicking on a panel header to expand or collapse that panel body. The panel content can be loaded via ajax by specifying a 'href' property. Users can define a panel to be selected. If it is not specified, then the first panel is taken by default. </p> 
+ <img src="api/images/model/accordion.png" /> 
+ <h4>Dependencies</h4> 
+ <ul> 
+  <li>panel</li> 
+ </ul> 
+ <h4>Usage Example</h4> 
+ <h5>Create Accordion</h5> 
+ <p>Create accordion via markup, add 'easyui-accordion' class to &lt;div/&gt; markup.</p> 
+ <textarea name="code-accordion" class="html">
+	&lt;div id=&quot;aa&quot; class=&quot;easyui-accordion&quot; style=&quot;width:300px;height:200px;&quot;&gt;
+		&lt;div title=&quot;Title1&quot; data-options=&quot;iconCls:'icon-save'&quot; style=&quot;overflow:auto;padding:10px;&quot;&gt;
+			&lt;h3 style=&quot;color:#0099FF;&quot;&gt;Accordion for jQuery&lt;/h3&gt;
+			&lt;p&gt;Accordion is a part of easyui framework for jQuery. 
+			It lets you define your accordion component on web page more easily.&lt;/p&gt;
+		&lt;/div&gt;
+		&lt;div title=&quot;Title2&quot; data-options=&quot;iconCls:'icon-reload',selected:true&quot; style=&quot;padding:10px;&quot;&gt;
+			content2
+		&lt;/div&gt;
+		&lt;div title=&quot;Title3&quot;&gt;
+			content3
+		&lt;/div&gt;
+	&lt;/div&gt;
+</textarea> 
+ <p>We can change or recreate accordion later and modify some features.</p> 
+ <textarea name="code-accordion" class="js">
+	$('#aa').accordion({
+		animate:false
+	});
+</textarea> 
+ <br /> 
+ <h5>Refresh Accordion Panel Content</h5> 
+ <p>Call 'getSelected' method to get the current panel and then we can call 'refresh' method of panel to load new content.</p> 
+ <textarea name="code-accordion" class="js">
+	var pp = $('#aa').accordion('getSelected');	// get the selected panel
+	if (pp){
+		pp.panel('refresh','new_content.php');	// call 'refresh' method to load new content
+	}
+</textarea> 
+ <p>&nbsp;</p> 
+ <h4>Container Options</h4> 
+ <table class="doc-table"> 
+  <tbody>
+   <tr> 
+    <th><strong>Name</strong></th> 
+    <th><strong>Type</strong></th> 
+    <th><strong>Description</strong></th> 
+    <th><strong>Default</strong></th> 
+   </tr> 
+   <tr> 
+    <td>width</td> 
+    <td>number</td> 
+    <td>手风琴容器的宽度。</td> 
+    <td>auto</td> 
+   </tr> 
+   <tr> 
+    <td>height</td> 
+    <td>number</td> 
+    <td>手风琴容器的高度。</td> 
+    <td>auto</td> 
+   </tr> 
+   <tr> 
+    <td>fit</td> 
+    <td>boolean</td> 
+    <td>设置为true设置手风琴容器尺寸适合它的父容器。</td> 
+    <td>false</td> 
+   </tr> 
+   <tr> 
+    <td>border</td> 
+    <td>boolean</td> 
+    <td>如果显示定义边界。</td> 
+    <td>true</td> 
+   </tr> 
+   <tr> 
+    <td>animate</td> 
+    <td>boolean</td> 
+    <td>如果定义显示动画效果时，展开或折叠面板。</td> 
+    <td>true</td> 
+   </tr> 
+  </tbody>
+ </table> 
+ <h4>Panel Options</h4> 
+ <p>The accordion panel options is inhirited from panel, below is the addition properties:</p> 
+ <table class="doc-table"> 
+  <tbody>
+   <tr> 
+    <th><strong>Name</strong></th> 
+    <th><strong>Type</strong></th> 
+    <th><strong>Description</strong></th> 
+    <th><strong>Default</strong></th> 
+   </tr> 
+   <tr> 
+    <td>selected</td> 
+    <td>boolean</td> 
+    <td>设置为true扩展板。</td> 
+    <td>false</td> 
+   </tr> 
+  </tbody>
+ </table> 
+ <h4>Events</h4> 
+ <table class="doc-table"> 
+  <tbody>
+   <tr> 
+    <th><strong>Name</strong></th> 
+    <th><strong>Parameters</strong></th> 
+    <th><strong>Description</strong></th> 
+   </tr> 
+   <tr> 
+    <td>onSelect</td> 
+    <td>title,index</td> 
+    <td>火灾在面板选择。</td> 
+   </tr> 
+   <tr> 
+    <td>onAdd</td> 
+    <td>title,index</td> 
+    <td>当一个新的面板添加火灾。</td> 
+   </tr> 
+   <tr> 
+    <td>onBeforeRemove</td> 
+    <td>title,index</td> 
+    <td>在一个面板中删除的火灾，返回false取消删除动作。</td> 
+   </tr> 
+   <tr> 
+    <td>onRemove</td> 
+    <td>title,index</td> 
+    <td>火灾时，面板中删除。</td> 
+   </tr> 
+  </tbody>
+ </table> 
+ <h4>Methods</h4> 
+ <table class="doc-table"> 
+  <tbody>
+   <tr> 
+    <th><strong>Name</strong></th> 
+    <th><strong>Parameter</strong></th> 
+    <th><strong>Description</strong></th> 
+   </tr> 
+   <tr> 
+    <td>options</td> 
+    <td>none</td> 
+    <td>返回手风琴的选项。</td> 
+   </tr> 
+   <tr> 
+    <td>panels</td> 
+    <td>none</td> 
+    <td>让所有的面板。</td> 
+   </tr> 
+   <tr> 
+    <td>resize</td> 
+    <td>none</td> 
+    <td>调整大小的手风琴。</td> 
+   </tr> 
+   <tr> 
+    <td>getSelected</td> 
+    <td>none</td> 
+    <td>把选定的面板。</td> 
+   </tr> 
+   <tr> 
+    <td>getPanel</td> 
+    <td>which</td> 
+    <td>获取指定的面板。“它的参数可以是标题或指数的面板。</td> 
+   </tr> 
+   <tr> 
+    <td>getPanelIndex</td> 
+    <td>panel</td> 
+    <td>获取指定的面板的索引。该方法可从版本1.3。下面的例子展示了如何选定的面板的索引。</td> 
+   </tr> 
+   <tr> 
+    <td>select</td> 
+    <td>which</td> 
+    <td>选择指定的面板。“它的参数可以是标题或指数的面板。</td> 
+   </tr> 
+   <tr> 
+    <td>add</td> 
+    <td>options</td> 
+    <td>添加一个新的面板。默认情况下，添加面板将被选定。添加一个未选中的新的面板，通过“选择”属性设置为假。代码示例：</td> 
+   </tr> 
+   <tr> 
+    <td>remove</td> 
+    <td>which</td> 
+    <td>删除指定的面板。“它的参数可以是标题或指数的面板。</td> 
+   </tr> 
+  </tbody>
+ </table> 
+</div>

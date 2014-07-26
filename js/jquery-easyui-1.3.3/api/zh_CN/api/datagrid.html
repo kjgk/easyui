@@ -1,0 +1,945 @@
+<div style="padding:10px"> 
+ <h3 id="overview">DataGrid</h3> 
+ <div style="width:200px;height:220px;padding:0 10px;background:#FBFBFB;border:1px solid #ccc;float:right;margin-left:20px"> 
+  <h3>Contents</h3> 
+  <ul> 
+   <li><a href="#overview">Overview</a></li> 
+   <li><a href="#usage">Usage Example</a></li> 
+   <li><a href="#dg-properties">DataGrid Properties</a></li> 
+   <li><a href="#cc-properties">Column Properties</a></li> 
+   <li><a href="#editor">Editor</a></li> 
+   <li><a href="#view">DataGrid View</a></li> 
+   <li><a href="#events">Events</a></li> 
+   <li><a href="#methods">Methods</a></li> 
+  </ul> 
+ </div> 
+ <p>Extend from $.fn.panel.defaults. Override defaults with $.fn.datagrid.defaults.</p> 
+ <p> The datagrid displays data in a tabular format and offers rich support to select, sort, group and edit data. The datagrid has been designed to reduce development time and to require no specific knowledge from developers. It is both featherweight and feature-rich. Cell merging, multi-column headers, frozen columns and footers are just a few of its features. </p> 
+ <img src="api/images/model/datagrid.png" /> 
+ <h4>Dependencies</h4> 
+ <ul> 
+  <li>panel</li> 
+  <li>resizable</li> 
+  <li>linkbutton</li> 
+  <li>pagination</li> 
+ </ul> 
+ <h4 id="usage">Usage Example</h4> 
+ <p>Create datagrid from an existing table element, defining columns, rows, and data in html.</p> 
+ <textarea name="code-datagrid" class="html">
+	&lt;table class=&quot;easyui-datagrid&quot;&gt;
+		&lt;thead&gt;
+			&lt;tr&gt;
+				&lt;th data-options=&quot;field:'code'&quot;&gt;Code&lt;/th&gt;
+				&lt;th data-options=&quot;field:'name'&quot;&gt;Name&lt;/th&gt;
+				&lt;th data-options=&quot;field:'price'&quot;&gt;Price&lt;/th&gt;
+			&lt;/tr&gt;
+		&lt;/thead&gt;
+		&lt;tbody&gt;
+			&lt;tr&gt;
+				&lt;td&gt;001&lt;/td&gt;&lt;td&gt;name1&lt;/td&gt;&lt;td&gt;2323&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+				&lt;td&gt;002&lt;/td&gt;&lt;td&gt;name2&lt;/td&gt;&lt;td&gt;4612&lt;/td&gt;
+			&lt;/tr&gt;
+		&lt;/tbody&gt;
+	&lt;/table&gt;
+</textarea> 
+ <p> Create datagrid via &lt;table&gt; markup. The nested &lt;th&gt; tags define the columns on the table. </p> 
+ <textarea name="code-datagrid" class="html">
+	&lt;table class=&quot;easyui-datagrid&quot; style=&quot;width:400px;height:250px&quot;
+			data-options=&quot;url:'datagrid_data.json',fitColumns:true,singleSelect:true&quot;&gt;
+		&lt;thead&gt;
+			&lt;tr&gt;
+				&lt;th data-options=&quot;field:'code',width:100&quot;&gt;Code&lt;/th&gt;
+				&lt;th data-options=&quot;field:'name',width:100&quot;&gt;Name&lt;/th&gt;
+				&lt;th data-options=&quot;field:'price',width:100,align:'right'&quot;&gt;Price&lt;/th&gt;
+			&lt;/tr&gt;
+		&lt;/thead&gt;
+	&lt;/table&gt;
+</textarea> 
+ <p>Create datagrid using javascript is also allowed.</p> 
+ <textarea name="code-datagrid" class="html">
+	&lt;table id=&quot;dg&quot;&gt;&lt;/table&gt;
+</textarea> 
+ <textarea name="code-datagrid" class="js">
+	$('#dg').datagrid({
+		url:'datagrid_data.json',
+		columns:[[
+			{field:'code',title:'Code',width:100},
+			{field:'name',title:'Name',width:100},
+			{field:'price',title:'Price',width:100,align:'right'}
+		]]
+	});
+</textarea> 
+ <p>Query data with some parameters.</p> 
+ <textarea name="code-datagrid" class="js">
+	$('#dg').datagrid('load', {
+		name: 'easyui',
+		address: 'ho'
+	});
+</textarea> 
+ <p>After changing data to server, refresh the front data.</p> 
+ <textarea name="code-datagrid" class="js">
+	$('#dg').datagrid('reload');	// reload the current page data
+</textarea> 
+ <br /> 
+ <h4 id="dg-properties">DataGrid Properties</h4> 
+ <p>The properties extend from panel. below is the added properties for datagrid.</p> 
+ <table class="doc-table"> 
+  <tbody>
+   <tr> 
+    <th><strong>Name</strong></th> 
+    <th><strong>Type</strong></th> 
+    <th><strong>Description</strong></th> 
+    <th><strong>Default</strong></th> 
+   </tr> 
+   <tr> 
+    <td>columns</td> 
+    <td>array</td> 
+    <td>DataGrid列配置对象，详情请参阅列属性。</td> 
+    <td>undefined</td> 
+   </tr> 
+   <tr> 
+    <td>frozenColumns</td> 
+    <td>array</td> 
+    <td>为列的属性相同，但这些列将被冻结在左。</td> 
+    <td>undefined</td> 
+   </tr> 
+   <tr> 
+    <td>fitColumns</td> 
+    <td>boolean</td> 
+    <td>真正的自动扩展\/合同列的大小以适应网格的宽度和防止水平滚动。</td> 
+    <td>false</td> 
+   </tr> 
+   <tr> 
+    <td>resizeHandle</td> 
+    <td>string</td> 
+    <td>调整大小的列位置，可用的值：左，右，俩个”。当“权利”，用户可以通过拖动调整大小的列的列标题的右边缘，等。此属性是可用的版本以来1.3.2。</td> 
+    <td>right</td> 
+   </tr> 
+   <tr> 
+    <td>autoRowHeight</td> 
+    <td>boolean</td> 
+    <td>如果定义的基础上建立，行内容的行的高度。设置为false可以提高加载性能。</td> 
+    <td>true</td> 
+   </tr> 
+   <tr> 
+    <td>toolbar</td> 
+    <td>array,selector</td> 
+    <td>DataGrid面板顶部的工具栏。可能的值：1）的阵列，每个工具的选项是一样的LinkButton。2）选择显示工具栏。一个
+     <div>
+      标签中定义工具栏：
+     </div></td> 
+    <td>null</td> 
+   </tr> 
+   <tr> 
+    <td>striped</td> 
+    <td>boolean</td> 
+    <td>真正的条纹行。</td> 
+    <td>false</td> 
+   </tr> 
+   <tr> 
+    <td>method</td> 
+    <td>string</td> 
+    <td>该方法要求远程数据类型。</td> 
+    <td>post</td> 
+   </tr> 
+   <tr> 
+    <td>nowrap</td> 
+    <td>boolean</td> 
+    <td>真实的显示在同一行数据。设置为true可以提高加载性能。</td> 
+    <td>true</td> 
+   </tr> 
+   <tr> 
+    <td>idField</td> 
+    <td>string</td> 
+    <td>指出哪些字段是一个标识字段。</td> 
+    <td>null</td> 
+   </tr> 
+   <tr> 
+    <td>url</td> 
+    <td>string</td> 
+    <td>一个URL请求从远程站点的数据。</td> 
+    <td>null</td> 
+   </tr> 
+   <tr> 
+    <td>data</td> 
+    <td>array,object</td> 
+    <td>要加载的数据。此属性是可用的版本以来1.3.2。代码示例：</td> 
+    <td>null</td> 
+   </tr> 
+   <tr> 
+    <td>loadMsg</td> 
+    <td>string</td> 
+    <td>当加载数据从远程站点，显示一个提示信息。</td> 
+    <td>Processing, please wait …</td> 
+   </tr> 
+   <tr> 
+    <td>pagination</td> 
+    <td>boolean</td> 
+    <td>真实地展现在DataGrid分页工具栏底部。</td> 
+    <td>false</td> 
+   </tr> 
+   <tr> 
+    <td>rownumbers</td> 
+    <td>boolean</td> 
+    <td>真正的显示行数列。</td> 
+    <td>false</td> 
+   </tr> 
+   <tr> 
+    <td>singleSelect</td> 
+    <td>boolean</td> 
+    <td>如果允许只选择一行。</td> 
+    <td>false</td> 
+   </tr> 
+   <tr> 
+    <td>checkOnSelect</td> 
+    <td>boolean</td> 
+    <td>如果TRUE，该复选框被选中\/未选中时，用户点击一行。如果FALSE，只有选中\/未选中复选框，当用户单击复选框的正上。此属性是可用的1.3以后的版本。</td> 
+    <td>true</td> 
+   </tr> 
+   <tr> 
+    <td>selectOnCheck</td> 
+    <td>boolean</td> 
+    <td>如果设置为TRUE，单击复选框将总是选择行。如果FALSE，选择行不会选中复选框。此属性是可用的1.3以后的版本。</td> 
+    <td>true</td> 
+   </tr> 
+   <tr> 
+    <td>pagePosition</td> 
+    <td>string</td> 
+    <td>定义了位置的寻呼机酒吧。有效值是：'顶'，' '的底部，俩个。此属性是可用的1.3以后的版本。</td> 
+    <td>bottom</td> 
+   </tr> 
+   <tr> 
+    <td>pageNumber</td> 
+    <td>number</td> 
+    <td>当设置分页属性，初始化的页面数。</td> 
+    <td>1</td> 
+   </tr> 
+   <tr> 
+    <td>pageSize</td> 
+    <td>number</td> 
+    <td>当设置分页属性，初始化的页面大小。</td> 
+    <td>10</td> 
+   </tr> 
+   <tr> 
+    <td>pageList</td> 
+    <td>array</td> 
+    <td>当设置分页属性，初始化的页面大小选择列表。</td> 
+    <td>[10,20,30,40,50]</td> 
+   </tr> 
+   <tr> 
+    <td>queryParams</td> 
+    <td>object</td> 
+    <td>当请求远程数据，发送额外的参数也。代码示例：</td> 
+    <td>{}</td> 
+   </tr> 
+   <tr> 
+    <td>sortName</td> 
+    <td>string</td> 
+    <td>可排序的列定义。</td> 
+    <td>null</td> 
+   </tr> 
+   <tr> 
+    <td>sortOrder</td> 
+    <td>string</td> 
+    <td>定义的列的排序顺序，只能“升序”或“降序”。</td> 
+    <td>asc</td> 
+   </tr> 
+   <tr> 
+    <td>remoteSort</td> 
+    <td>boolean</td> 
+    <td>定义如果要排序的数据从服务器。</td> 
+    <td>true</td> 
+   </tr> 
+   <tr> 
+    <td>showHeader</td> 
+    <td>boolean</td> 
+    <td>如果定义显示的行标题。</td> 
+    <td>true</td> 
+   </tr> 
+   <tr> 
+    <td>showFooter</td> 
+    <td>boolean</td> 
+    <td>如果定义显示行页脚。</td> 
+    <td>false</td> 
+   </tr> 
+   <tr> 
+    <td>scrollbarSize</td> 
+    <td>number</td> 
+    <td>（当滚动条滚动条的宽度或高度（垂直）时，滚动条是水平的）。</td> 
+    <td>18</td> 
+   </tr> 
+   <tr> 
+    <td>rowStyler</td> 
+    <td>function</td> 
+    <td>返回样式如“背景：红'。功能需要两个参数：rowIndex：行索引，开始与0行对应rowData：此代码示例的记录：</td> 
+    <td></td> 
+   </tr> 
+   <tr> 
+    <td>loader</td> 
+    <td>function</td> 
+    <td>定义了如何从远程服务器的负荷数据。返回false可以中止这一行动。此功能需要下列参数：参数：参数的对象传递到远程服务器。成功（数据）：将被调用时，检索数据成功回调函数。error()：将被调用时，未能检索数据的回调函数。</td> 
+    <td>json loader</td> 
+   </tr> 
+   <tr> 
+    <td>loadFilter</td> 
+    <td>function</td> 
+    <td>过滤后的数据返回到显示。该函数采用一个参数的数据，这表明原始数据。你可以改变原始数据的标准数据格式。这个函数必须返回标准数据对象包含'总'和'行'的属性。代码示例：</td> 
+    <td></td> 
+   </tr> 
+   <tr> 
+    <td>editors</td> 
+    <td>object</td> 
+    <td>定义了编辑在编辑行。</td> 
+    <td>predefined editors</td> 
+   </tr> 
+   <tr> 
+    <td>view</td> 
+    <td>object</td> 
+    <td>定义DataGrid控件的视图。</td> 
+    <td>default view</td> 
+   </tr> 
+  </tbody>
+ </table> 
+ <br /> 
+ <h4 id="cc-properties">Column Properties</h4> 
+ <p>The DataGrid Columns is an array object, which element is an array too. The element of element array is a config object, which defines every column field.</p>
+ <p> </p>
+ <p>Code example:</p> 
+ <textarea name="code-datagrid" class="js">
+	columns:[[
+		{field:'itemid',title:'Item ID',rowspan:2,width:80,sortable:true},
+		{field:'productid',title:'Product ID',rowspan:2,width:80,sortable:true},
+		{title:'Item Details',colspan:4}
+	],[
+		{field:'listprice',title:'List Price',width:80,align:'right',sortable:true},
+		{field:'unitcost',title:'Unit Cost',width:80,align:'right',sortable:true},
+		{field:'attr1',title:'Attribute',width:100},
+		{field:'status',title:'Status',width:60}
+	]]
+</textarea> 
+ <p></p> 
+ <table class="doc-table"> 
+  <tbody>
+   <tr> 
+    <th><strong>Name</strong></th> 
+    <th><strong>Type</strong></th> 
+    <th><strong>Description</strong></th> 
+    <th><strong>Default</strong></th> 
+   </tr> 
+   <tr> 
+    <td>title</td> 
+    <td>string</td> 
+    <td>列标题文本。</td> 
+    <td>undefined</td> 
+   </tr> 
+   <tr> 
+    <td>field</td> 
+    <td>string</td> 
+    <td>列字段的名称。</td> 
+    <td>undefined</td> 
+   </tr> 
+   <tr> 
+    <td>width</td> 
+    <td>number</td> 
+    <td>列的宽度。如果没有定义，宽度会自动扩展以容纳其内容。</td> 
+    <td>undefined</td> 
+   </tr> 
+   <tr> 
+    <td>rowspan</td> 
+    <td>number</td> 
+    <td>显示多少行细胞应该参加。</td> 
+    <td>undefined</td> 
+   </tr> 
+   <tr> 
+    <td>colspan</td> 
+    <td>number</td> 
+    <td>显示多少列细胞应该参加。</td> 
+    <td>undefined</td> 
+   </tr> 
+   <tr> 
+    <td>align</td> 
+    <td>string</td> 
+    <td>说明如何将数据列。”左，右，'center”可以用。</td> 
+    <td>undefined</td> 
+   </tr> 
+   <tr> 
+    <td>halign</td> 
+    <td>string</td> 
+    <td>说明如何将列标题。可能的值是：左，右，'center”。如果不指定，标题对齐数据对齐的定义通过调整性质相同。此属性是可用的版本以来1.3.2。</td> 
+    <td>undefined</td> 
+   </tr> 
+   <tr> 
+    <td>sortable</td> 
+    <td>boolean</td> 
+    <td>真正让柱可以排序。</td> 
+    <td>undefined</td> 
+   </tr> 
+   <tr> 
+    <td>order</td> 
+    <td>string</td> 
+    <td>默认的排序顺序，只能“升序”或“降序”。此属性是可用的版本以来1.3.2。</td> 
+    <td>undefined</td> 
+   </tr> 
+   <tr> 
+    <td>resizable</td> 
+    <td>boolean</td> 
+    <td>如果允许列的大小可以改变。</td> 
+    <td>undefined</td> 
+   </tr> 
+   <tr> 
+    <td>fixed</td> 
+    <td>boolean</td> 
+    <td>真正的防止调整宽度时的fitcolumns”设置为真。</td> 
+    <td>undefined</td> 
+   </tr> 
+   <tr> 
+    <td>hidden</td> 
+    <td>boolean</td> 
+    <td>真正的隐藏列。</td> 
+    <td>undefined</td> 
+   </tr> 
+   <tr> 
+    <td>checkbox</td> 
+    <td>boolean</td> 
+    <td>真正显示一个复选框。复选框具有固定宽度的列。</td> 
+    <td>undefined</td> 
+   </tr> 
+   <tr> 
+    <td>formatter</td> 
+    <td>function</td> 
+    <td>细胞的格式化功能，带三个参数：价值：字段值。rowData：行记录数据。rowIndex：行索引。代码示例：</td> 
+    <td>undefined</td> 
+   </tr> 
+   <tr> 
+    <td>styler</td> 
+    <td>function</td> 
+    <td>细胞器的功能，返回的字符串等风格自定义背景样式：红细胞。功能：以三参数值：字段值。rowData：行记录数据。rowIndex：行索引。代码示例：</td> 
+    <td>undefined</td> 
+   </tr> 
+   <tr> 
+    <td>sorter</td> 
+    <td>function</td> 
+    <td>用来做局部排序的自定义字段的排序功能，需要两个参数：第一个字段的值。乙：第二个字段值。代码示例：</td> 
+    <td>undefined</td> 
+   </tr> 
+   <tr> 
+    <td>editor</td> 
+    <td>string,object</td> 
+    <td>显示编辑类型。当字符串指示编辑类型，当对象包含两个属性：类型：字符串，编辑的类型，可能的类型：文本，文本框，复选框，numberbox，validatebox，datebox，组合框，combotree。选项：对象，对应于编辑类型编辑器选项。</td> 
+    <td>undefined</td> 
+   </tr> 
+  </tbody>
+ </table> 
+ <br /> 
+ <h4 id="editor">Editor</h4> 
+ <p>Override defaults with $.fn.datagrid.defaults.editors.</p>
+ <p> </p>
+ <p>Every editor has following actions:</p> 
+ <table class="doc-table"> 
+  <tbody>
+   <tr> 
+    <th><strong>Name</strong></th> 
+    <th><strong>Parameters</strong></th> 
+    <th><strong>Description</strong></th> 
+   </tr> 
+   <tr> 
+    <td>init</td> 
+    <td>container, options</td> 
+    <td>初始化并返回对象的编辑。</td> 
+   </tr> 
+   <tr> 
+    <td>destroy</td> 
+    <td>target</td> 
+    <td>如果有必要摧毁编辑器。</td> 
+   </tr> 
+   <tr> 
+    <td>getValue</td> 
+    <td>target</td> 
+    <td>从编辑文本获得价值。</td> 
+   </tr> 
+   <tr> 
+    <td>setValue</td> 
+    <td>target , value</td> 
+    <td>编辑设定值。</td> 
+   </tr> 
+   <tr> 
+    <td>resize</td> 
+    <td>target , width</td> 
+    <td>如果有必要的话，调整编辑。</td> 
+   </tr> 
+  </tbody>
+ </table> 
+ <p>For example, the text editor is defined as following:</p> 
+ <textarea name="code-datagrid" class="js">
+	$.extend($.fn.datagrid.defaults.editors, {
+		text: {
+			init: function(container, options){
+				var input = $('&lt;input type=&quot;text&quot; class=&quot;datagrid-editable-input&quot;&gt;').appendTo(container);
+				return input;
+			},
+			getValue: function(target){
+				return $(target).val();
+			},
+			setValue: function(target, value){
+				$(target).val(value);
+			},
+			resize: function(target, width){
+				var input = $(target);
+				if ($.boxModel == true){
+					input.width(width - (input.outerWidth() - input.width()));
+				} else {
+					input.width(width);
+				}
+			}
+		}
+	});
+</textarea> 
+ <br /> 
+ <h4 id="view">DataGrid View</h4> 
+ <p>Override defaults with $.fn.datagrid.defaults.view.</p> 
+ <p>The view is an object that will tell datagrid how to render rows. The object must defines the following functions:</p> 
+ <table class="doc-table"> 
+  <tbody>
+   <tr> 
+    <th><strong>Name</strong></th> 
+    <th><strong>Parameters</strong></th> 
+    <th><strong>Description</strong></th> 
+   </tr> 
+   <tr> 
+    <td>render</td> 
+    <td>target, container, frozen</td> 
+    <td>当数据加载。目标：DOM对象，数据对象。集装箱：集装箱的行。冷冻：表明如果使冷冻集装箱。</td> 
+   </tr> 
+   <tr> 
+    <td>renderFooter</td> 
+    <td>target, container, frozen</td> 
+    <td>这是一个选择的功能，使行页脚。</td> 
+   </tr> 
+   <tr> 
+    <td>renderRow</td> 
+    <td>target, fields, frozen, rowIndex, rowData</td> 
+    <td>这是一个选择功能，将被渲染功能。</td> 
+   </tr> 
+   <tr> 
+    <td>refreshRow</td> 
+    <td>target, rowIndex</td> 
+    <td>定义了如何更新指定行。</td> 
+   </tr> 
+   <tr> 
+    <td>onBeforeRender</td> 
+    <td>target, rows</td> 
+    <td>在视图中呈现的火灾。</td> 
+   </tr> 
+   <tr> 
+    <td>onAfterRender</td> 
+    <td>target</td> 
+    <td>火灾后的视图被渲染。</td> 
+   </tr> 
+  </tbody>
+ </table> 
+ <br /> 
+ <h4 id="events">Events</h4> 
+ <p>The events extend from panel, below is the added events for datagrid.</p> 
+ <table class="doc-table"> 
+  <tbody>
+   <tr> 
+    <th><strong>Name</strong></th> 
+    <th><strong>Parameters</strong></th> 
+    <th><strong>Description</strong></th> 
+   </tr> 
+   <tr> 
+    <td>onLoadSuccess</td> 
+    <td>data</td> 
+    <td>火灾时，数据加载成功。</td> 
+   </tr> 
+   <tr> 
+    <td>onLoadError</td> 
+    <td>none</td> 
+    <td>发生时的一些错误加载远程数据的火灾。</td> 
+   </tr> 
+   <tr> 
+    <td>onBeforeLoad</td> 
+    <td>param</td> 
+    <td>在请求加载数据的火灾。如果返回false荷载作用将被取消。</td> 
+   </tr> 
+   <tr> 
+    <td>onClickRow</td> 
+    <td>rowIndex, rowData</td> 
+    <td>火灾，当用户点击一个行，参数包括：rowIndex：单击的行的索引，从0开始rowData：相应的点击行的记录</td> 
+   </tr> 
+   <tr> 
+    <td>onDblClickRow</td> 
+    <td>rowIndex, rowData</td> 
+    <td>当用户双击一个火行，参数包括：rowIndex：单击的行的索引，从0开始rowData：相应的点击行的记录</td> 
+   </tr> 
+   <tr> 
+    <td>onClickCell</td> 
+    <td>rowIndex, field, value</td> 
+    <td>当用户单击一个单元格的火灾。</td> 
+   </tr> 
+   <tr> 
+    <td>onDblClickCell</td> 
+    <td>rowIndex, field, value</td> 
+    <td>当用户双击单元格火灾。代码示例：</td> 
+   </tr> 
+   <tr> 
+    <td>onSortColumn</td> 
+    <td>sort, order</td> 
+    <td>火灾时，用户列排序，参数包括：排序：排序的列字段的名称为：排序列顺序</td> 
+   </tr> 
+   <tr> 
+    <td>onResizeColumn</td> 
+    <td>field, width</td> 
+    <td>火灾，当用户调整列。</td> 
+   </tr> 
+   <tr> 
+    <td>onSelect</td> 
+    <td>rowIndex, rowData</td> 
+    <td>火灾时，用户选择一行，参数包括：rowIndex：选定的行的索引，从0开始rowData：对应于选定行的记录</td> 
+   </tr> 
+   <tr> 
+    <td>onUnselect</td> 
+    <td>rowIndex, rowData</td> 
+    <td>当用户取消火行，参数包括：rowIndex：未选中的行的索引，开始与0未选中的行对应rowData：记录</td> 
+   </tr> 
+   <tr> 
+    <td>onSelectAll</td> 
+    <td>rows</td> 
+    <td>火灾时，用户选择所有行。</td> 
+   </tr> 
+   <tr> 
+    <td>onUnselectAll</td> 
+    <td>rows</td> 
+    <td>当用户取消选择所有行的火灾。</td> 
+   </tr> 
+   <tr> 
+    <td>onCheck</td> 
+    <td>rowIndex,rowData</td> 
+    <td>当用户检查火灾一行，参数包括：rowIndex：选中的行的索引，从0开始rowData：记录对应检查行此事件是自1.3版。</td> 
+   </tr> 
+   <tr> 
+    <td>onUncheck</td> 
+    <td>rowIndex,rowData</td> 
+    <td>当用户取消火行，参数包括：rowIndex：未选中的行的索引，从0开始rowData：记录对应于未行此事件是自1.3版。</td> 
+   </tr> 
+   <tr> 
+    <td>onCheckAll</td> 
+    <td>rows</td> 
+    <td>当用户检查火灾的所有行。这一事件是自1.3版。</td> 
+   </tr> 
+   <tr> 
+    <td>onUncheckAll</td> 
+    <td>rows</td> 
+    <td>当用户取消所有行的火灾。这一事件是自1.3版。</td> 
+   </tr> 
+   <tr> 
+    <td>onBeforeEdit</td> 
+    <td>rowIndex, rowData</td> 
+    <td>火灾时，用户开始编辑一行，参数包括：rowIndex：编辑的行的索引，从0开始rowData：对应于编辑行记录</td> 
+   </tr> 
+   <tr> 
+    <td>onAfterEdit</td> 
+    <td>rowIndex, rowData, changes</td> 
+    <td>火灾，当用户完成编辑，参数包括：rowIndex：编辑的行的索引，从0开始rowData：对应于编辑行变化的记录：改变的领域\/值对的</td> 
+   </tr> 
+   <tr> 
+    <td>onCancelEdit</td> 
+    <td>rowIndex, rowData</td> 
+    <td>火灾当用户取消编辑行，参数包括：rowIndex：编辑的行的索引，从0开始rowData：对应于编辑行记录</td> 
+   </tr> 
+   <tr> 
+    <td>onHeaderContextMenu</td> 
+    <td>e, field</td> 
+    <td>火灾时，头是右键点击DataGrid。</td> 
+   </tr> 
+   <tr> 
+    <td>onRowContextMenu</td> 
+    <td>e, rowIndex, rowData</td> 
+    <td>火灾时，行右键点击。</td> 
+   </tr> 
+  </tbody>
+ </table> 
+ <br /> 
+ <h4 id="methods">Methods</h4> 
+ <table class="doc-table"> 
+  <tbody>
+   <tr> 
+    <th><strong>Name</strong></th> 
+    <th><strong>Parameter</strong></th> 
+    <th><strong>Description</strong></th> 
+   </tr> 
+   <tr> 
+    <td>options</td> 
+    <td>none</td> 
+    <td>返回选择对象。</td> 
+   </tr> 
+   <tr> 
+    <td>getPager</td> 
+    <td>none</td> 
+    <td>返回对象的寻呼机。</td> 
+   </tr> 
+   <tr> 
+    <td>getPanel</td> 
+    <td>none</td> 
+    <td>返回面板对象。</td> 
+   </tr> 
+   <tr> 
+    <td>getColumnFields</td> 
+    <td>frozen</td> 
+    <td>返回的列的域。如果冷冻设冻结列战场返回真。代码示例：</td> 
+   </tr> 
+   <tr> 
+    <td>getColumnOption</td> 
+    <td>field</td> 
+    <td>返回指定列的选项。</td> 
+   </tr> 
+   <tr> 
+    <td>resize</td> 
+    <td>param</td> 
+    <td>做调整，做布局。</td> 
+   </tr> 
+   <tr> 
+    <td>load</td> 
+    <td>param</td> 
+    <td>加载和显示第一页行。如果“参数被指定，它将替换的queryparams财产。通常一个查询通过一些参数，此方法可被称为从服务器加载新数据。</td> 
+   </tr> 
+   <tr> 
+    <td>reload</td> 
+    <td>param</td> 
+    <td>重新加载行。同“负载”方法，但在当前页面。</td> 
+   </tr> 
+   <tr> 
+    <td>reloadFooter</td> 
+    <td>footer</td> 
+    <td>重装尾行。代码示例：</td> 
+   </tr> 
+   <tr> 
+    <td>loading</td> 
+    <td>none</td> 
+    <td>显示加载状态。</td> 
+   </tr> 
+   <tr> 
+    <td>loaded</td> 
+    <td>none</td> 
+    <td>隐藏加载状态。</td> 
+   </tr> 
+   <tr> 
+    <td>fitColumns</td> 
+    <td>none</td> 
+    <td>使柱自动展开\/折叠以适应网格宽度。</td> 
+   </tr> 
+   <tr> 
+    <td>fixColumnSize</td> 
+    <td>field</td> 
+    <td>大小固定栏目。如果“场”参数没有指定，所有列的大小是固定的。代码示例：</td> 
+   </tr> 
+   <tr> 
+    <td>fixRowHeight</td> 
+    <td>index</td> 
+    <td>确定指定行的高度。如果“索引”参数没有指定，所有行的高度将是固定的。</td> 
+   </tr> 
+   <tr> 
+    <td>freezeRow</td> 
+    <td>index</td> 
+    <td>冻结的指定行，总是在顶部显示当Datagrid是向下滚动。这种方法可起版1.3.2。</td> 
+   </tr> 
+   <tr> 
+    <td>autoSizeColumn</td> 
+    <td>field</td> 
+    <td>调整列的宽度以适应内容。该方法可从版本1.3。</td> 
+   </tr> 
+   <tr> 
+    <td>loadData</td> 
+    <td>data</td> 
+    <td>加载本地数据，将删除旧行。</td> 
+   </tr> 
+   <tr> 
+    <td>getData</td> 
+    <td>none</td> 
+    <td>返回加载数据。</td> 
+   </tr> 
+   <tr> 
+    <td>getRows</td> 
+    <td>none</td> 
+    <td>返回当前页面的行。</td> 
+   </tr> 
+   <tr> 
+    <td>getFooterRows</td> 
+    <td>none</td> 
+    <td>返回尾行。</td> 
+   </tr> 
+   <tr> 
+    <td>getRowIndex</td> 
+    <td>row</td> 
+    <td>返回指定行索引的行参数，可以连续记录或ID字段的值。</td> 
+   </tr> 
+   <tr> 
+    <td>getChecked</td> 
+    <td>none</td> 
+    <td>返回的所有行的复选框已被选中。该方法可从版本1.3。</td> 
+   </tr> 
+   <tr> 
+    <td>getSelected</td> 
+    <td>none</td> 
+    <td>返回第一个选定的行的记录或空。</td> 
+   </tr> 
+   <tr> 
+    <td>getSelections</td> 
+    <td>none</td> 
+    <td>将所有选定的行，选择时没有记录，我将返回空数组。</td> 
+   </tr> 
+   <tr> 
+    <td>clearSelections</td> 
+    <td>none</td> 
+    <td>清除所有的选择。</td> 
+   </tr> 
+   <tr> 
+    <td>clearChecked</td> 
+    <td>none</td> 
+    <td>清除所有选中的行。这种方法可起版1.3.2。</td> 
+   </tr> 
+   <tr> 
+    <td>scrollTo</td> 
+    <td>index</td> 
+    <td>滚动到指定的行。该方法可从1.3.3版。</td> 
+   </tr> 
+   <tr> 
+    <td>highlightRow</td> 
+    <td>index</td> 
+    <td>亮点一行。该方法可从1.3.3版。</td> 
+   </tr> 
+   <tr> 
+    <td>selectAll</td> 
+    <td>none</td> 
+    <td>选择所有当前页的行。</td> 
+   </tr> 
+   <tr> 
+    <td>unselectAll</td> 
+    <td>none</td> 
+    <td>取消选择所有当前页的行。</td> 
+   </tr> 
+   <tr> 
+    <td>selectRow</td> 
+    <td>index</td> 
+    <td>选择一行，0行的索引开始。</td> 
+   </tr> 
+   <tr> 
+    <td>selectRecord</td> 
+    <td>idValue</td> 
+    <td>通过ID值的参数选择一行。</td> 
+   </tr> 
+   <tr> 
+    <td>unselectRow</td> 
+    <td>index</td> 
+    <td>取消选择一行。</td> 
+   </tr> 
+   <tr> 
+    <td>checkAll</td> 
+    <td>none</td> 
+    <td>检查所有当前页的行。该方法可从版本1.3。</td> 
+   </tr> 
+   <tr> 
+    <td>uncheckAll</td> 
+    <td>none</td> 
+    <td>取消所有当前页的行。该方法可从版本1.3。</td> 
+   </tr> 
+   <tr> 
+    <td>checkRow</td> 
+    <td>index</td> 
+    <td>检查一排，0排索引开始。该方法可从版本1.3。</td> 
+   </tr> 
+   <tr> 
+    <td>uncheckRow</td> 
+    <td>index</td> 
+    <td>取消选中一行，0行的索引开始。该方法可从版本1.3。</td> 
+   </tr> 
+   <tr> 
+    <td>beginEdit</td> 
+    <td>index</td> 
+    <td>开始编辑行。</td> 
+   </tr> 
+   <tr> 
+    <td>endEdit</td> 
+    <td>index</td> 
+    <td>最后编辑行。</td> 
+   </tr> 
+   <tr> 
+    <td>cancelEdit</td> 
+    <td>index</td> 
+    <td>取消编辑行。</td> 
+   </tr> 
+   <tr> 
+    <td>getEditors</td> 
+    <td>index</td> 
+    <td>获取指定的行编辑。每个编辑器具有以下特性：行动：，编辑器可以做动作，作为编辑器定义相同。目标：目标编辑器jQuery对象。字段：字段名称。类型：编辑器类型，如“文本”，'combobox’，'datebox”，等等。</td> 
+   </tr> 
+   <tr> 
+    <td>getEditor</td> 
+    <td>options</td> 
+    <td>获取指定的编辑器中，选择包含两个属性：指数：行索引。字段：字段名称。代码示例：</td> 
+   </tr> 
+   <tr> 
+    <td>refreshRow</td> 
+    <td>index</td> 
+    <td>刷新一行。</td> 
+   </tr> 
+   <tr> 
+    <td>validateRow</td> 
+    <td>index</td> 
+    <td>验证指定的行，返回true时有效。</td> 
+   </tr> 
+   <tr> 
+    <td>updateRow</td> 
+    <td>param</td> 
+    <td>更新的参数指定的行，包含以下属性：指标：要更新的行索引。行：新的一行数据。代码示例：</td> 
+   </tr> 
+   <tr> 
+    <td>appendRow</td> 
+    <td>row</td> 
+    <td>添加新的一行。新行将添加到最后的位置：</td> 
+   </tr> 
+   <tr> 
+    <td>insertRow</td> 
+    <td>param</td> 
+    <td>插入新的一行，该参数包含以下属性：指数：行索引的插入，如果没有定义，添加新的行。行：行数据。代码示例：</td> 
+   </tr> 
+   <tr> 
+    <td>deleteRow</td> 
+    <td>index</td> 
+    <td>删除行。</td> 
+   </tr> 
+   <tr> 
+    <td>getChanges</td> 
+    <td>type</td> 
+    <td>换行自上次提交。类型参数表明类型更改的行，可能的值是：插入，删除，更新，等等。当类型参数没有指定，返回所有更改的行。</td> 
+   </tr> 
+   <tr> 
+    <td>acceptChanges</td> 
+    <td>none</td> 
+    <td>提交所有更改数据因为它是装或上次AcceptChanges被称为。</td> 
+   </tr> 
+   <tr> 
+    <td>rejectChanges</td> 
+    <td>none</td> 
+    <td>回滚所有更改的数据创建以来，或上次AcceptChanges被称为。</td> 
+   </tr> 
+   <tr> 
+    <td>mergeCells</td> 
+    <td>options</td> 
+    <td>合并某些细胞一个细胞中，选择包含以下属性：指数：行索引。字段：字段名称。格：RowSpan计数被合并。合并单元格合并单元格：计数被合并。</td> 
+   </tr> 
+   <tr> 
+    <td>showColumn</td> 
+    <td>field</td> 
+    <td>显示指定的列。</td> 
+   </tr> 
+   <tr> 
+    <td>hideColumn</td> 
+    <td>field</td> 
+    <td>指定的列隐藏。</td> 
+   </tr> 
+  </tbody>
+ </table> 
+</div>

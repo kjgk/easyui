@@ -1,0 +1,111 @@
+<div style="padding:10px"> 
+ <h3>ValidateBox</h3> 
+ <p>Override defaults with $.fn.validatebox.defaults.</p> 
+ <p> The validatebox is designed to validate the form input fields. If users enter invalid values, it will change the background color, display the alarm icon and a tooltip message. The validatebox can be integrated with form plugin and will prevent invalid fields from submission. </p> 
+ <img src="api/images/model/validatebox.png" /> 
+ <h4>Dependencies</h4> 
+ <ul> 
+  <li>tooltip</li> 
+ </ul> 
+ <h4>Usage</h4> 
+ <p>Create validatebox from markup.</p> 
+ <textarea name="code-validatebox" class="html">	&lt;input id=&quot;vv&quot; class=&quot;easyui-validatebox&quot; data-options=&quot;required:true,validType:'email'&quot; /&gt;</textarea> 
+ <p>Create validatebox using javascript.</p> 
+ <textarea name="code-validatebox" class="html">	&lt;input id=&quot;vv&quot; /&gt;</textarea> 
+ <textarea name="code-validatebox" class="js">	$('#vv').validatebox({		required: true,		validType: 'email'	});</textarea> 
+ <p>To check password and retype password are same.</p> 
+ <textarea name="code-validatebox" class="js">	// extend the 'equals' rule	$.extend($.fn.validatebox.defaults.rules, {		equals: {			validator: function(value,param){				return value == $(param[0]).val();			},			message: 'Field do not match.'		}	});</textarea> 
+ <textarea name="code-validatebox" class="html">	&lt;input id=&quot;pwd&quot; name=&quot;pwd&quot; type=&quot;password&quot; class=&quot;easyui-validatebox&quot; data-options=&quot;required:true&quot; /&gt;	&lt;input id=&quot;rpwd&quot; name=&quot;rpwd&quot; type=&quot;password&quot; class=&quot;easyui-validatebox&quot; 		required=&quot;required&quot; validType=&quot;equals['#pwd']&quot; /&gt;</textarea> 
+ <br /> 
+ <h4>Validate Rule</h4> 
+ <p>The validate rule is defined by using required and validType property, here are the rules already implemented:</p> 
+ <ul> 
+  <li>email: Match email regex rule.</li> 
+  <li>url: Match URL regex rule.</li> 
+  <li>length[0,100]: Between x and x characters allowed.</li> 
+  <li>remote['http://.../action.do','paramName']: Send ajax request to do validate value, return 'true' when successfully.</li> 
+ </ul> 
+ <p>To custom validate rule, override $.fn.validatebox.defaults.rules that defines a validator function and invalid message. For example, to define a minLength valid type:</p> 
+ <textarea name="code-validatebox" class="js">	$.extend($.fn.validatebox.defaults.rules, {		minLength: {			validator: function(value, param){				return value.length &gt;= param[0];			},			message: 'Please enter at least {0} characters.'		}	});</textarea> 
+ <p>Now you can use the minLength validtype to define an input box that should be inputed at least 5 characters:</p> 
+ <textarea name="code-validatebox" class="html">	&lt;input class=&quot;easyui-validatebox&quot; data-options=&quot;validType:'minLength[5]'&quot;&gt;</textarea> 
+ <br /> 
+ <h4>Properties</h4> 
+ <table class="doc-table"> 
+  <tbody>
+   <tr> 
+    <th><strong>Name</strong></th> 
+    <th><strong>Type</strong></th> 
+    <th><strong>Description</strong></th> 
+    <th><strong>Default</strong></th> 
+   </tr> 
+   <tr> 
+    <td>required</td> 
+    <td>boolean</td> 
+    <td>如果定义字段应该输入。</td> 
+    <td>false</td> 
+   </tr> 
+   <tr> 
+    <td>validType</td> 
+    <td>string,array</td> 
+    <td>将字段定义有效的类型，如电子邮件，网址，等可能的值是：1）有效的字符串类型，适用于一个单一的验证规则。2）一个有效类型数组，应用多个验证规则。多个验证字段规则可起版1.3.2。代码示例：\r &lt;输入class=“easyui validatebox”数据选项=“要求：真的，validtype：'url”&gt; \r &lt;输入class=“easyui validatebox”数据选项=“\r要求：真的，\r validtype：[ 'email' 'length [ 20 ]”，“] \r”</td> 
+    <td>null</td> 
+   </tr> 
+   <tr> 
+    <td>delay</td> 
+    <td>number</td> 
+    <td>延迟验证从最后一个输入值。此属性是可用的版本以来1.3.2。</td> 
+    <td>200</td> 
+   </tr> 
+   <tr> 
+    <td>missingMessage</td> 
+    <td>string</td> 
+    <td>显示的工具提示文本时，文本框为空。</td> 
+    <td>This field is required.</td> 
+   </tr> 
+   <tr> 
+    <td>invalidMessage</td> 
+    <td>string</td> 
+    <td>显示的工具提示文本时，文本框的内容无效。</td> 
+    <td>null</td> 
+   </tr> 
+   <tr> 
+    <td>tipPosition</td> 
+    <td>string</td> 
+    <td>定义了提示信息的位置文本框的内容是无效的。可能的值：左，右”。此属性是可用的版本以来1.3.2。</td> 
+    <td>right</td> 
+   </tr> 
+   <tr> 
+    <td>deltaX</td> 
+    <td>number</td> 
+    <td>提示在x方向的偏移。此属性是因为1.3.3版。</td> 
+    <td>0</td> 
+   </tr> 
+  </tbody>
+ </table> 
+ <h4>Methods</h4> 
+ <table class="doc-table"> 
+  <tbody>
+   <tr> 
+    <th><strong>Name</strong></th> 
+    <th><strong>Parameter</strong></th> 
+    <th><strong>Description</strong></th> 
+   </tr> 
+   <tr> 
+    <td>destroy</td> 
+    <td>none</td> 
+    <td>清除和销毁组件。</td> 
+   </tr> 
+   <tr> 
+    <td>validate</td> 
+    <td>none</td> 
+    <td>做验证确定文本框的内容是有效的。</td> 
+   </tr> 
+   <tr> 
+    <td>isValid</td> 
+    <td>none</td> 
+    <td>调用验证方法并返回验证结果，真或假。</td> 
+   </tr> 
+  </tbody>
+ </table> 
+</div>
